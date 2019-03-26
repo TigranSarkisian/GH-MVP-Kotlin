@@ -29,40 +29,35 @@ class GitHubLocalDataSource : GitHubDataSource {
     }
 
     override fun addRepos(repos: List<Repo>): Completable {
-        return Single.just(RealmFactory.insertOrUpdateRepos(repos))
-            .toCompletable()
+        return Completable.fromCallable { RealmFactory.insertOrUpdateRepos(repos) }
             .doOnComplete {
                 Timber.i("Added ${repos.size} repos")
             }
     }
 
     override fun addRepo(repo: Repo): Completable {
-        return Single.just(RealmFactory.insertOrUpdateRepos(repo))
-            .toCompletable()
+        return Completable.fromCallable { RealmFactory.insertOrUpdateRepos(repo) }
             .doOnComplete {
                 Timber.i("Added ${repo.name} repo")
             }
     }
 
     override fun updateRepo(repo: Repo): Completable {
-        return Single.just(RealmFactory.insertOrUpdateRepos(repo))
-            .toCompletable()
+        return Completable.fromCallable { RealmFactory.insertOrUpdateRepos(repo) }
             .doOnComplete {
                 Timber.i("Updated ${repo.name} repo")
             }
     }
 
     override fun deleteRepo(repo: Repo): Completable {
-        return Single.just(RealmFactory.deleteRepo(repo))
-            .toCompletable()
+        return Completable.fromCallable { RealmFactory.deleteRepo(repo) }
             .doOnComplete {
                 Timber.i("Deleted ${repo.name} repo")
             }
     }
 
     override fun addRepoToFavorites(repo: Repo): Completable {
-        return Single.just(RealmFactory.insertOrUpdateRepos(repo))
-            .toCompletable()
+        return Completable.fromCallable { RealmFactory.insertOrUpdateRepos(repo) }
             .doOnComplete {
                 Timber.i("Added ${repo.name} repo to favorites")
             }
@@ -70,8 +65,7 @@ class GitHubLocalDataSource : GitHubDataSource {
 
     override fun deleteRepoFromFavorites(repo: Repo): Completable {
         repo.favorite = false
-        return Single.just(RealmFactory.insertOrUpdateRepos(repo))
-            .toCompletable()
+        return Completable.fromCallable { RealmFactory.insertOrUpdateRepos(repo) }
             .doOnComplete {
                 Timber.i("Deleted ${repo.name} repo from favorites")
             }

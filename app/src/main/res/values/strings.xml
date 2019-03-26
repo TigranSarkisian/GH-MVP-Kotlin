@@ -1,3 +1,38 @@
 <resources>
-    <string name="app_name">GH-MVP-Kotlin</string>
+    <string name="app_name">GitHub</string>
+    <string name="screen_list">List</string>
+    <string name="screen_favorites">Favorites</string>
+    <string name="screen_search">Search</string>
+
+    <string name="unknown_error">Unknown error</string>
+    <string name="network_error">Network error</string>
+    <string name="not_modified_error">304 Not Modified</string>
+    <string name="bad_request_error">400 Bad Request</string>
+    <string name="unauthorized_error">401 Unauthorized</string>
+    <string name="forbidden_error">403 Forbidden</string>
+    <string name="not_found_error">404 Not Found</string>
+    <string name="method_not_allowed_error">405 Method Not Allowed</string>
+    <string name="conflict_error">409 Conflict</string>
+    <string name="unprocessable_error">422 Unprocessable</string>
+    <string name="server_error_error">500 Server Error</string>
+
+    <string name="time_sec" formatted="false">%d sec</string>
+    <string name="time_min" formatted="false">%d min</string>
+    <string name="time_hour" formatted="false">%d h</string>
+    <string name="time_day" formatted="false">%d d</string>
+    <string name="time_ago" formatted="false">%s ago</string>
+
+    <string name="updated_at" formatted="false">Updated at %s</string>
+
+    <string name="repo_id" formatted="false">Repo id %s</string>
+    <string name="repo_url" formatted="false">Url %s</string>
+    <string name="repo_language" formatted="false">Language is %s</string>
+    <string name="repo_description" formatted="false">Description: %s</string>
+    <string name="repo_network_count" formatted="false">Network count: %s</string>
+    <string name="repo_subscribers_count" formatted="false">Subscribers count: %s</string>
+
+    <string name="action_add_item">Add item</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_favorite">Favorite</string>
+    <string name="status_updating">Updating…</string>
 </resources>

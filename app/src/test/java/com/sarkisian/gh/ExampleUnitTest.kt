@@ -1,4 +1,4 @@
-package com.example.gh
+package com.sarkisian.gh
 
 import org.junit.Test
 

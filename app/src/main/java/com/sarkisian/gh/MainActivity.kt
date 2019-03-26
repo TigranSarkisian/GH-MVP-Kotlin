@@ -1,4 +1,4 @@
-package com.example.gh
+package com.sarkisian.gh
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

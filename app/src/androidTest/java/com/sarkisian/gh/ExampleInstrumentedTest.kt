@@ -1,4 +1,4 @@
-package com.example.gh
+package com.sarkisian.gh
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

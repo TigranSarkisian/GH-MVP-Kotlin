@@ -20,11 +20,11 @@ object RealmFactory {
         Realm.init(context)
 
         val config = RealmConfiguration.Builder()
-                .name(REALM_DB_NAME)
-                .schemaVersion(SCHEMA_VERSION.toLong())
-                .deleteRealmIfMigrationNeeded()
-                .rxFactory(RealmObservableFactory())
-                .build()
+            .name(REALM_DB_NAME)
+            .schemaVersion(SCHEMA_VERSION.toLong())
+            .deleteRealmIfMigrationNeeded()
+            .rxFactory(RealmObservableFactory())
+            .build()
 
         Realm.setDefaultConfiguration(config)
 
@@ -50,8 +50,8 @@ object RealmFactory {
         Realm.getDefaultInstance().use { realm ->
             realm.executeTransaction { r ->
                 val result = r.where(Repo::class.java)
-                        .equalTo(Repo.REPO_ID, repo.id)
-                        .findAll()
+                    .equalTo(Repo.REPO_ID, repo.id)
+                    .findAll()
 
                 result.deleteAllFromRealm()
             }
@@ -64,8 +64,8 @@ object RealmFactory {
 
         Realm.getDefaultInstance().use { realm ->
             val realmRepoList = realm
-                    .where(Repo::class.java)
-                    .findAll()
+                .where(Repo::class.java)
+                .findAll()
 
             repoList = realm.copyFromRealm(realmRepoList)
 
@@ -81,9 +81,9 @@ object RealmFactory {
 
         Realm.getDefaultInstance().use { realm ->
             val realmRepoList = realm
-                    .where(Repo::class.java)
-                    .equalTo(Repo.REPO_IS_FAVORITE, true)
-                    .findAll()
+                .where(Repo::class.java)
+                .equalTo(Repo.REPO_IS_FAVORITE, true)
+                .findAll()
 
             repoList = realm.copyFromRealm(realmRepoList)
 
@@ -94,13 +94,13 @@ object RealmFactory {
     }
 
     @JvmStatic
-    fun getRepo(repoName: String): Repo {
-        var repo = Repo()
+    fun getRepo(repoName: String): Repo? {
+        var repo: Repo? = null
 
         Realm.getDefaultInstance().use { realm ->
             val realmRepo = realm.where(Repo::class.java)
-                    .equalTo(Repo.REPO_NAME, repoName)
-                    .findFirst()
+                .equalTo(Repo.REPO_NAME, repoName)
+                .findFirst()
 
             if (realmRepo != null) {
                 repo = realm.copyFromRealm(realmRepo)

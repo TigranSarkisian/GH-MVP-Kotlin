@@ -9,20 +9,17 @@ import android.view.*
 import android.widget.ImageView
 import com.sarkisian.gh.R
 import com.sarkisian.gh.data.entity.Repo
-import com.sarkisian.gh.di.scope.ActivityScoped
 import com.sarkisian.gh.ui.adapter.RepoAdapter
 import com.sarkisian.gh.ui.base.BaseFragment
 import com.sarkisian.gh.util.extensions.*
 import kotlinx.android.synthetic.main.fragment_search.*
-import javax.inject.Inject
+import org.koin.android.ext.android.get
 
 
-@ActivityScoped
 class RepoSearchFragment : BaseFragment(), RepoSearchContract.RepoSearchView,
-        RepoAdapter.OnItemClickListener {
+    RepoAdapter.OnItemClickListener {
 
-    @Inject
-    lateinit var repoSearchPresenter: RepoSearchContract.RepoSearchPresenter
+    private var repoSearchPresenter: RepoSearchContract.RepoSearchPresenter = get()
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var repoAdapter: RepoAdapter
 
@@ -36,7 +33,7 @@ class RepoSearchFragment : BaseFragment(), RepoSearchContract.RepoSearchView,
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            container?.inflate(R.layout.fragment_search)
+        container?.inflate(R.layout.fragment_search)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

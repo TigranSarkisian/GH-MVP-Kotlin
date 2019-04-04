@@ -11,9 +11,8 @@ import com.sarkisian.gh.util.rxbus.RxBus
 import com.sarkisian.gh.util.rxbus.RxEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
-class RepoListPresenter @Inject constructor(
+class RepoListPresenter constructor(
     private val gitHubRepository: GitHubDataSource,
     private val errorHandler: ErrorHandler,
     private val rxBus: RxBus
@@ -32,18 +31,18 @@ class RepoListPresenter @Inject constructor(
         this.username = username
         if (forceUpdate) gitHubRepository.refreshRepos()
         gitHubRepository.getRepos(username)
-                .doOnSubscribe { if (forceUpdate) view?.showLoadingIndicator(true) }
-                .doAfterTerminate { if (forceUpdate) view?.showLoadingIndicator(false) }
-                .subscribe(
-                        {
-                            view?.showRepos(it)
-                            view?.showEmptyState(it.isEmpty())
-                            currentPage = 1
-                            loadingNextPage = false
-                        },
-                        { it -> errorHandler.readError(it) { view?.showMessage(it) } }
-                )
-                .addTo(compositeDisposable)
+            .doOnSubscribe { if (forceUpdate) view?.showLoadingIndicator(true) }
+            .doAfterTerminate { if (forceUpdate) view?.showLoadingIndicator(false) }
+            .subscribe(
+                {
+                    view?.showRepos(it)
+                    view?.showEmptyState(it.isEmpty())
+                    currentPage = 1
+                    loadingNextPage = false
+                },
+                { it -> errorHandler.readError(it) { view?.showMessage(it) } }
+            )
+            .addTo(compositeDisposable)
     }
 
     override fun loadNextPage() {
@@ -51,52 +50,52 @@ class RepoListPresenter @Inject constructor(
             currentPage++
 
             gitHubRepository.getRepos(this.username, currentPage)
-                    .doOnSubscribe {
-                        loadingNextPage = true
-                        view?.showNextPageLoadingIndicator(true)
-                    }
-                    .doAfterTerminate {
-                        loadingNextPage = false
-                        view?.showNextPageLoadingIndicator(false)
-                    }
-                    .subscribe(
-                            { view?.showNextPageRepos(it) },
-                            { it -> errorHandler.readError(it) { view?.showMessage(it) } }
-                    )
-                    .addTo(compositeDisposable)
+                .doOnSubscribe {
+                    loadingNextPage = true
+                    view?.showNextPageLoadingIndicator(true)
+                }
+                .doAfterTerminate {
+                    loadingNextPage = false
+                    view?.showNextPageLoadingIndicator(false)
+                }
+                .subscribe(
+                    { view?.showNextPageRepos(it) },
+                    { it -> errorHandler.readError(it) { view?.showMessage(it) } }
+                )
+                .addTo(compositeDisposable)
         }
     }
 
     override fun deleteRepo(repo: Repo) {
         gitHubRepository.deleteRepo(repo)
-                .subscribe { view?.showRepoDeleted(repo) }
-                .addTo(compositeDisposable)
+            .subscribe { view?.showRepoDeleted(repo) }
+            .addTo(compositeDisposable)
     }
 
     override fun addRepo(repo: Repo) {
         gitHubRepository.addRepo(repo)
-                .subscribe { view?.showRepoAdded(repo) }
-                .addTo(compositeDisposable)
+            .subscribe { view?.showRepoAdded(repo) }
+            .addTo(compositeDisposable)
     }
 
     override fun updateRepo(repo: Repo) {
         gitHubRepository.updateRepo(repo)
-                .subscribe { view?.showRepoUpdated(repo) }
-                .addTo(compositeDisposable)
+            .subscribe { view?.showRepoUpdated(repo) }
+            .addTo(compositeDisposable)
     }
 
     private fun subscribeOnRxBusEvents() {
         rxBus.observable()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    when (it) {
-                        is RxEvent.DeleteRepo -> view?.showRepoDeleted(it.repo)
-                        is RxEvent.UpdateRepo -> view?.showRepoUpdated(it.repo)
-                        is RxEvent.FavoriteRepo -> view?.showRepoUpdated(it.repo)
-                    }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                when (it) {
+                    is RxEvent.DeleteRepo -> view?.showRepoDeleted(it.repo)
+                    is RxEvent.UpdateRepo -> view?.showRepoUpdated(it.repo)
+                    is RxEvent.FavoriteRepo -> view?.showRepoUpdated(it.repo)
                 }
-                .addTo(compositeDisposable)
+            }
+            .addTo(compositeDisposable)
     }
 
 }

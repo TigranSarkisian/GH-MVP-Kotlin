@@ -4,22 +4,22 @@ import android.app.Activity
 import android.app.Application
 import android.os.StrictMode
 import com.sarkisian.gh.data.db.RealmFactory
-import com.sarkisian.gh.di.DaggerAppComponent
+import com.sarkisian.gh.di.AppModule
+import com.sarkisian.gh.di.data.APIModule
+import com.sarkisian.gh.di.data.GitHubRepositoryModule
+import com.sarkisian.gh.di.mvp.RepoFavoritesModule
+import com.sarkisian.gh.di.mvp.RepoModule
+import com.sarkisian.gh.di.mvp.ReposModule
+import com.sarkisian.gh.di.mvp.SearchModule
 import com.squareup.leakcanary.LeakCanary
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
 import io.reactivex.plugins.RxJavaPlugins
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 import timber.log.Timber
-import javax.inject.Inject
 
 
-class GitHubApp : Application(), HasActivityInjector {
-
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Activity>
-
-    override fun activityInjector(): AndroidInjector<Activity>? = androidInjector
+class GitHubApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -28,11 +28,22 @@ class GitHubApp : Application(), HasActivityInjector {
         Timber.plant(Timber.DebugTree())
         RealmFactory.init(this)
         RxJavaPlugins.setErrorHandler { throwable -> Timber.e(throwable.toString()) }
-        DaggerAppComponent
-                .builder()
-                .application(this)
-                .build()
-                .inject(this)
+
+        startKoin {
+            androidContext(this@GitHubApp)
+            androidLogger()
+            modules(
+                listOf(
+                    AppModule.module,
+                    APIModule.module,
+                    GitHubRepositoryModule.module,
+                    RepoFavoritesModule.module,
+                    RepoModule.module,
+                    ReposModule.module,
+                    SearchModule.module
+                )
+            )
+        }
     }
 
     private fun installLeakCanary() {
@@ -44,10 +55,12 @@ class GitHubApp : Application(), HasActivityInjector {
 
     private fun turnOnStrictMode() {
         if (BuildConfig.DEBUG) {
-            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
+            StrictMode.setThreadPolicy(
+                StrictMode.ThreadPolicy.Builder()
                     .detectAll()
                     .penaltyLog()
-                    .build())
+                    .build()
+            )
         }
     }
 

@@ -7,24 +7,23 @@ import com.sarkisian.gh.data.entity.SearchRequest
 import io.reactivex.Completable
 import io.reactivex.Observable
 import timber.log.Timber
-import javax.inject.Inject
 
-class GitHubRemoteDataSource @Inject constructor(
-        private val gitHubAPI: GitHubAPI
+class GitHubRemoteDataSource constructor(
+    private val gitHubAPI: GitHubAPI
 ) : GitHubDataSource {
 
     override fun getRepo(gitHubUser: String, repoName: String): Observable<Repo> {
         return gitHubAPI.getRepo(gitHubUser, repoName)
-                .doOnNext {
-                    Timber.i("Loaded ${it.name} repo")
-                }
+            .doOnNext {
+                Timber.i("Loaded ${it.name} repo")
+            }
     }
 
     override fun getRepos(gitHubUser: String, page: Int): Observable<MutableList<Repo>> {
         return gitHubAPI.getRepos(username = gitHubUser, page = page)
-                .doOnNext {
-                    Timber.i("Loaded ${it.size} repos")
-                }
+            .doOnNext {
+                Timber.i("Loaded ${it.size} repos")
+            }
     }
 
     override fun addRepo(repo: Repo): Completable = Completable.complete()
@@ -43,9 +42,9 @@ class GitHubRemoteDataSource @Inject constructor(
 
     override fun searchRepos(query: String, page: Int): Observable<SearchRequest> {
         return gitHubAPI.searchRepos(query = query, page = page)
-                .doOnNext {
-                    Timber.i("Search result: ${it.totalCount} repos")
-                }
+            .doOnNext {
+                Timber.i("Search result: ${it.totalCount} repos")
+            }
     }
 
     override fun refreshRepos() {

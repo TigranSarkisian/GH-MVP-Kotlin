@@ -12,21 +12,18 @@ import com.sarkisian.gh.R
 import com.sarkisian.gh.data.api.ApiFactory.GIT_HUB_USER
 import com.sarkisian.gh.data.entity.Owner
 import com.sarkisian.gh.data.entity.Repo
-import com.sarkisian.gh.di.scope.ActivityScoped
 import com.sarkisian.gh.ui.adapter.RepoAdapter
 import com.sarkisian.gh.ui.base.BaseFragment
 import com.sarkisian.gh.ui.repo.RepoActivity
 import com.sarkisian.gh.util.extensions.*
 import kotlinx.android.synthetic.main.fragment_repo_list.*
-import javax.inject.Inject
+import org.koin.android.ext.android.get
 
 
-@ActivityScoped
 class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
-        RepoAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+    RepoAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-    @Inject
-    lateinit var repoListPresenter: RepoListContract.RepoListPresenter
+    private var repoListPresenter: RepoListContract.RepoListPresenter = get()
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var repoAdapter: RepoAdapter
 
@@ -40,7 +37,7 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            container?.inflate(R.layout.fragment_repo_list)
+        container?.inflate(R.layout.fragment_repo_list)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -64,12 +61,12 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
         when (item.itemId) {
             R.id.add_repo -> {
                 val newRepo = Repo(
-                        id = System.currentTimeMillis(),
-                        name = "Repo ${System.currentTimeMillis()}",
-                        language = "Kotlin",
-                        htmlUrl = "http://www.nourl.com/",
-                        description = "This is test repo created with id ${System.currentTimeMillis()}",
-                        updatedAt = System.currentTimeMillis().formatTimeMillisToISO()
+                    id = System.currentTimeMillis(),
+                    name = "Repo ${System.currentTimeMillis()}",
+                    language = "Kotlin",
+                    htmlUrl = "http://www.nourl.com/",
+                    description = "This is test repo created with id ${System.currentTimeMillis()}",
+                    updatedAt = System.currentTimeMillis().formatTimeMillisToISO()
                 )
                 repoListPresenter.addRepo(newRepo)
             }

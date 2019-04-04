@@ -9,9 +9,8 @@ import com.sarkisian.gh.util.extensions.emptyString
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
-class RepoSearchPresenter @Inject constructor(
+class RepoSearchPresenter constructor(
     private val gitHubRepository: GitHubDataSource,
     private val errorHandler: ErrorHandler
 ) : BasePresenter<RepoSearchContract.RepoSearchView>(), RepoSearchContract.RepoSearchPresenter {

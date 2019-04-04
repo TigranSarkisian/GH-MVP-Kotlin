@@ -2,18 +2,12 @@ package com.sarkisian.gh.di.data
 
 import com.sarkisian.gh.data.api.ApiFactory
 import com.sarkisian.gh.data.api.ApiFactory.BASE_URL
-import com.sarkisian.gh.data.api.GitHubAPI
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import org.koin.dsl.module
 
-@Module
-class APIModule {
+object APIModule {
 
-    @Singleton
-    @Provides
-    fun provideGitHubAPI(): GitHubAPI {
-        return ApiFactory.getGitHubAPI(BASE_URL)
+    val module = module {
+        single { ApiFactory.getGitHubAPI(BASE_URL) }
     }
 
 }

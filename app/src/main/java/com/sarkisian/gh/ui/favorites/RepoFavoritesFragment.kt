@@ -12,20 +12,17 @@ import com.sarkisian.gh.R
 import com.sarkisian.gh.data.api.ApiFactory.GIT_HUB_USER
 import com.sarkisian.gh.data.entity.Owner
 import com.sarkisian.gh.data.entity.Repo
-import com.sarkisian.gh.di.scope.ActivityScoped
 import com.sarkisian.gh.ui.adapter.RepoAdapter
 import com.sarkisian.gh.ui.base.BaseFragment
 import com.sarkisian.gh.ui.repo.RepoActivity
 import com.sarkisian.gh.util.extensions.*
 import kotlinx.android.synthetic.main.fragment_repo_favorites.*
-import javax.inject.Inject
+import org.koin.android.ext.android.get
 
-@ActivityScoped
 class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavoritesView,
-        RepoAdapter.OnItemClickListener {
+    RepoAdapter.OnItemClickListener {
 
-    @Inject
-    lateinit var repoFavoritesPresenter: RepoFavoritesContract.RepoFavoritesPresenter
+    private var repoFavoritesPresenter: RepoFavoritesContract.RepoFavoritesPresenter = get()
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var repoAdapter: RepoAdapter
 
@@ -39,7 +36,7 @@ class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavorite
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            container?.inflate(R.layout.fragment_repo_favorites)
+        container?.inflate(R.layout.fragment_repo_favorites)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

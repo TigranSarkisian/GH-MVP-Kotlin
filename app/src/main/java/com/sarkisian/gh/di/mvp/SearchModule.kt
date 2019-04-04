@@ -1,24 +1,15 @@
 package com.sarkisian.gh.di.mvp
 
-import com.sarkisian.gh.di.scope.ActivityScoped
-import com.sarkisian.gh.di.scope.FragmentScoped
 import com.sarkisian.gh.ui.search.RepoSearchContract
 import com.sarkisian.gh.ui.search.RepoSearchFragment
 import com.sarkisian.gh.ui.search.RepoSearchPresenter
-import dagger.Binds
-import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import org.koin.dsl.module
 
-@Module
-abstract class SearchModule {
+object SearchModule {
 
-    @FragmentScoped
-    @ContributesAndroidInjector
-    abstract fun bindRepoSearchFragment(): RepoSearchFragment
-
-    @ActivityScoped
-    @Binds
-    abstract fun repoSearchPresenter(repoSearchPresenter: RepoSearchPresenter):
-            RepoSearchContract.RepoSearchPresenter
+    val module = module {
+        factory { RepoSearchFragment() }
+        factory { RepoSearchPresenter(get(), get()) as RepoSearchContract.RepoSearchPresenter }
+    }
 
 }

@@ -1,16 +1,15 @@
 package com.sarkisian.gh.di.mvp
 
-import com.sarkisian.gh.di.scope.ActivityScoped
+import com.sarkisian.gh.ui.repo.RepoActivity
 import com.sarkisian.gh.ui.repo.RepoContract
 import com.sarkisian.gh.ui.repo.RepoPresenter
-import dagger.Binds
-import dagger.Module
+import org.koin.dsl.module
 
-@Module
-abstract class RepoModule {
+object RepoModule {
 
-    @ActivityScoped
-    @Binds
-    abstract fun repoPresenter(repoPresenter: RepoPresenter): RepoContract.RepoPresenter
+    val module = module {
+        factory { RepoActivity() }
+        factory { RepoPresenter(get(), get()) as RepoContract.RepoPresenter }
+    }
 
 }

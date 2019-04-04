@@ -1,4 +1,4 @@
-package com.sarkisian.gh.di
+package com.sarkisian.gh.di.data
 
 import com.sarkisian.gh.data.api.GitHubAPI
 import com.sarkisian.gh.data.repository.GitHubDataSource

@@ -1,4 +1,4 @@
-package com.sarkisian.gh.di
+package com.sarkisian.gh.di.mvp
 
 import com.sarkisian.gh.di.scope.ActivityScoped
 import com.sarkisian.gh.di.scope.FragmentScoped

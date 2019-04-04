@@ -1,4 +1,4 @@
-package com.sarkisian.gh.di
+package com.sarkisian.gh.di.mvp
 
 import com.sarkisian.gh.di.scope.ActivityScoped
 import com.sarkisian.gh.ui.main.MainActivity
@@ -10,7 +10,8 @@ import dagger.android.ContributesAndroidInjector
 abstract class BuildersModule {
 
     @ActivityScoped
-    @ContributesAndroidInjector(modules = arrayOf(ReposModule::class, RepoFavoritesModule::class,
+    @ContributesAndroidInjector(modules = arrayOf(
+        ReposModule::class, RepoFavoritesModule::class,
             SearchModule::class))
     abstract fun bindMainActivity(): MainActivity
 

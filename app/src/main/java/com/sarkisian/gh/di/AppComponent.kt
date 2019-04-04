@@ -1,6 +1,9 @@
 package com.sarkisian.gh.di
 
 import com.sarkisian.gh.GitHubApp
+import com.sarkisian.gh.di.data.APIModule
+import com.sarkisian.gh.di.data.GitHubRepositoryModule
+import com.sarkisian.gh.di.mvp.BuildersModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -11,7 +14,9 @@ import javax.inject.Singleton
         AndroidSupportInjectionModule::class,
         BuildersModule::class,
         AppModule::class,
-        GitHubRepositoryModule::class))
+        APIModule::class,
+        GitHubRepositoryModule::class)
+)
 interface AppComponent {
 
     @Component.Builder

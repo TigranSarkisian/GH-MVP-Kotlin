@@ -41,10 +41,4 @@ class AppModule {
         return RxBus()
     }
 
-    @Singleton
-    @Provides
-    fun provideGitHubAPI(): GitHubAPI {
-        return ApiFactory.getGitHubAPI(BASE_URL)
-    }
-
 }

@@ -4,7 +4,7 @@ import android.app.Application
 import android.os.StrictMode
 import com.sarkisian.gh.data.db.RealmFactory
 import com.sarkisian.gh.di.AppModule
-import com.sarkisian.gh.di.data.APIModule
+import com.sarkisian.gh.di.data.GitHubAPIModule
 import com.sarkisian.gh.di.data.GitHubRepositoryModule
 import com.sarkisian.gh.di.mvp.RepoFavoritesModule
 import com.sarkisian.gh.di.mvp.RepoModule
@@ -34,7 +34,7 @@ class GitHubApp : Application() {
             modules(
                 AppModule.module,
                 GitHubRepositoryModule.module,
-                APIModule.module,
+                GitHubAPIModule.module,
                 ReposModule.module,
                 RepoFavoritesModule.module,
                 RepoModule.module,

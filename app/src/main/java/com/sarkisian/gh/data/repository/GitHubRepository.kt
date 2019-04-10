@@ -9,10 +9,9 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
 
-class GitHubRepository @Inject constructor(
+class GitHubRepository constructor(
     private val gitHubAPI: GitHubAPI
 ) : GitHubDataSource {
 

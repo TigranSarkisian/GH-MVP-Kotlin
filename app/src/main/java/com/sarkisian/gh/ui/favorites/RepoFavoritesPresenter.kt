@@ -7,9 +7,8 @@ import com.sarkisian.gh.ui.base.mvp.BasePresenter
 import com.sarkisian.gh.util.error.ErrorHandler
 import com.sarkisian.gh.util.extensions.addTo
 import io.reactivex.android.schedulers.AndroidSchedulers
-import javax.inject.Inject
 
-class RepoFavoritesPresenter @Inject constructor(
+class RepoFavoritesPresenter constructor(
     private val gitHubRepository: GitHubDataSource,
     private val errorHandler: ErrorHandler
 ) : BasePresenter<RepoFavoritesContract.RepoFavoritesView>(), RepoFavoritesContract.RepoFavoritesPresenter {

@@ -7,7 +7,7 @@ import org.koin.dsl.module
 object ReposModule {
 
     val module = module {
-        factory { RepoListPresenter(get(), get(), get()) as RepoListContract.RepoListPresenter }
+        factory { RepoListPresenter(get(), get()) as RepoListContract.RepoListPresenter }
     }
 
 }

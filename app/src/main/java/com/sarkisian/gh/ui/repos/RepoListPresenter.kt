@@ -7,8 +7,6 @@ import com.sarkisian.gh.ui.base.mvp.BasePresenter
 import com.sarkisian.gh.util.error.ErrorHandler
 import com.sarkisian.gh.util.extensions.addTo
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
 class RepoListPresenter constructor(
     private val gitHubRepository: GitHubDataSource,

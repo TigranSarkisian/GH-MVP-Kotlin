@@ -4,16 +4,13 @@ package com.sarkisian.gh.ui.search
 import com.jakewharton.rxbinding2.InitialValueObservable
 import com.sarkisian.gh.data.repository.GitHubDataSource
 import com.sarkisian.gh.ui.base.mvp.BasePresenter
-import com.sarkisian.gh.util.error.ErrorHandler
 import com.sarkisian.gh.util.extensions.addTo
 import io.reactivex.BackpressureStrategy
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
-class RepoSearchPresenter @Inject constructor(
+class RepoSearchPresenter constructor(
     private val gitHubRepository: GitHubDataSource
 ) : BasePresenter<RepoSearchContract.RepoSearchView>(), RepoSearchContract.RepoSearchPresenter {
 

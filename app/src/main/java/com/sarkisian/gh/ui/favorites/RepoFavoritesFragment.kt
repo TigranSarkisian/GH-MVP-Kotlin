@@ -22,7 +22,7 @@ import org.koin.android.ext.android.inject
 class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavoritesView,
     RepoAdapter.OnItemClickListener {
 
-    private val repoFavoritesPresenter by inject<RepoFavoritesContract.RepoFavoritesPresenter >()
+    private val repoFavoritesPresenter by inject<RepoFavoritesContract.RepoFavoritesPresenter>()
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var repoAdapter: RepoAdapter
 
@@ -35,8 +35,11 @@ class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavorite
         repoFavoritesPresenter.attachView(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        container?.inflate(R.layout.fragment_repo_favorites)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = container?.inflate(R.layout.fragment_repo_favorites)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

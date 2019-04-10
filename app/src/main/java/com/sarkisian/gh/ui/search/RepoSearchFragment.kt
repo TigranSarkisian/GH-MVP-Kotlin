@@ -38,7 +38,7 @@ class RepoSearchFragment : BaseFragment(), RepoSearchContract.RepoSearchView,
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-       ): View? = container?.inflate(com.sarkisian.gh.R.layout.fragment_search)
+    ): View? = container?.inflate(com.sarkisian.gh.R.layout.fragment_search)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -16,7 +16,6 @@ import com.sarkisian.gh.ui.adapter.RepoAdapter
 import com.sarkisian.gh.ui.base.BaseFragment
 import com.sarkisian.gh.ui.repo.RepoActivity
 import com.sarkisian.gh.util.extensions.*
-import com.sarkisian.gh.util.rxbus.RxBus
 import kotlinx.android.synthetic.main.fragment_repo_list.*
 import org.koin.android.ext.android.inject
 
@@ -25,7 +24,6 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
     RepoAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     private val repoListPresenter by inject<RepoListContract.RepoListPresenter>()
-
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var repoAdapter: RepoAdapter
 
@@ -42,7 +40,7 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-       ): View? = container?.inflate(R.layout.fragment_repo_list)
+    ): View? = container?.inflate(R.layout.fragment_repo_list)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

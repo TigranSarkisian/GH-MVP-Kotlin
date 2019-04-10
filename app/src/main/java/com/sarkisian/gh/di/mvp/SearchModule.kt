@@ -7,7 +7,7 @@ import org.koin.dsl.module
 object SearchModule {
 
     val module = module {
-        factory { RepoSearchPresenter(get(), get()) as RepoSearchContract.RepoSearchPresenter }
+        factory { RepoSearchPresenter(get()) as RepoSearchContract.RepoSearchPresenter }
     }
 
 }

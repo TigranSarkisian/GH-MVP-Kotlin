@@ -15,12 +15,12 @@ import org.koin.android.ext.android.inject
 
 class RepoActivity : BaseActivity(), RepoContract.RepoView, View.OnClickListener {
 
-    override val layoutResource: Int
-        get() = R.layout.activity_repo
-
     private val repoPresenter by inject<RepoContract.RepoPresenter>()
     private var gitHubRepo: Repo? = null
     private var menu: Menu? = null
+
+    override val layoutResource: Int
+        get() = R.layout.activity_repo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

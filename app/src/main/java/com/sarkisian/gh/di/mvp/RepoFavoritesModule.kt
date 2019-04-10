@@ -7,7 +7,7 @@ import org.koin.dsl.module
 object RepoFavoritesModule {
 
     val module = module {
-        factory { RepoFavoritesPresenter(get(), get(), get()) as RepoFavoritesContract.RepoFavoritesPresenter }
+        factory { RepoFavoritesPresenter(get(), get()) as RepoFavoritesContract.RepoFavoritesPresenter }
     }
 
 }

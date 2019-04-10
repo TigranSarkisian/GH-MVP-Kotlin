@@ -17,12 +17,12 @@ import com.sarkisian.gh.ui.base.BaseFragment
 import com.sarkisian.gh.ui.repo.RepoActivity
 import com.sarkisian.gh.util.extensions.*
 import kotlinx.android.synthetic.main.fragment_repo_favorites.*
-import org.koin.android.ext.android.get
+import org.koin.android.ext.android.inject
 
 class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavoritesView,
     RepoAdapter.OnItemClickListener {
 
-    private var repoFavoritesPresenter: RepoFavoritesContract.RepoFavoritesPresenter = get()
+    private val repoFavoritesPresenter by inject<RepoFavoritesContract.RepoFavoritesPresenter >()
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var repoAdapter: RepoAdapter
 

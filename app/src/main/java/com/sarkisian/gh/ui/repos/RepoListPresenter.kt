@@ -29,19 +29,20 @@ class RepoListPresenter constructor(
 
     override fun loadRepos(username: String, forceUpdate: Boolean) {
         this.username = username
+
         if (forceUpdate) gitHubRepository.refreshRepos()
+
         gitHubRepository.getRepos(username)
             .doOnSubscribe { if (forceUpdate) view?.showLoadingIndicator(true) }
             .doAfterTerminate { if (forceUpdate) view?.showLoadingIndicator(false) }
-            .subscribe(
-                {
-                    view?.showRepos(it)
-                    view?.showEmptyState(it.isEmpty())
-                    currentPage = 1
-                    loadingNextPage = false
-                },
-                { it -> errorHandler.readError(it) { view?.showMessage(it) } }
-            )
+            .subscribe({
+                view?.showRepos(it)
+                view?.showEmptyState(it.isEmpty())
+                currentPage = 1
+                loadingNextPage = false
+            }, {
+                errorHandler.readError(it) { view?.showMessage(it) }
+            })
             .addTo(compositeDisposable)
     }
 
@@ -58,10 +59,11 @@ class RepoListPresenter constructor(
                     loadingNextPage = false
                     view?.showNextPageLoadingIndicator(false)
                 }
-                .subscribe(
-                    { view?.showNextPageRepos(it) },
-                    { it -> errorHandler.readError(it) { view?.showMessage(it) } }
-                )
+                .subscribe({
+                    view?.showNextPageRepos(it)
+                }, {
+                    errorHandler.readError(it) { view?.showMessage(it) }
+                })
                 .addTo(compositeDisposable)
         }
     }

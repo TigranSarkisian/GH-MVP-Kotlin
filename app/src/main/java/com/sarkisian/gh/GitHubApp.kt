@@ -1,6 +1,5 @@
 package com.sarkisian.gh
 
-import android.app.Activity
 import android.app.Application
 import android.os.StrictMode
 import com.sarkisian.gh.data.db.RealmFactory
@@ -30,18 +29,16 @@ class GitHubApp : Application() {
         RxJavaPlugins.setErrorHandler { throwable -> Timber.e(throwable.toString()) }
 
         startKoin {
-            androidContext(this@GitHubApp)
             androidLogger()
+            androidContext(this@GitHubApp)
             modules(
-                listOf(
-                    AppModule.module,
-                    APIModule.module,
-                    GitHubRepositoryModule.module,
-                    RepoFavoritesModule.module,
-                    RepoModule.module,
-                    ReposModule.module,
-                    SearchModule.module
-                )
+                AppModule.module,
+                GitHubRepositoryModule.module,
+                APIModule.module,
+                ReposModule.module,
+                RepoFavoritesModule.module,
+                RepoModule.module,
+                SearchModule.module
             )
         }
     }

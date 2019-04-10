@@ -13,13 +13,13 @@ import com.sarkisian.gh.ui.adapter.RepoAdapter
 import com.sarkisian.gh.ui.base.BaseFragment
 import com.sarkisian.gh.util.extensions.*
 import kotlinx.android.synthetic.main.fragment_search.*
-import org.koin.android.ext.android.get
+import org.koin.android.ext.android.inject
 
 
 class RepoSearchFragment : BaseFragment(), RepoSearchContract.RepoSearchView,
     RepoAdapter.OnItemClickListener {
 
-    private var repoSearchPresenter: RepoSearchContract.RepoSearchPresenter = get()
+    private val repoSearchPresenter by inject<RepoSearchContract.RepoSearchPresenter>()
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var repoAdapter: RepoAdapter
 

@@ -7,9 +7,7 @@ import retrofit2.HttpException
 import timber.log.Timber
 import java.io.IOException
 
-class ErrorHandler constructor(
-    private val context: Context
-) {
+class ErrorHandler constructor(private val context: Context) {
 
     fun readError(error: Throwable, messageListener: (String) -> Unit) {
         Timber.e(error)

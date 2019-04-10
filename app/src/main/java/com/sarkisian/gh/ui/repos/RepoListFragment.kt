@@ -16,14 +16,16 @@ import com.sarkisian.gh.ui.adapter.RepoAdapter
 import com.sarkisian.gh.ui.base.BaseFragment
 import com.sarkisian.gh.ui.repo.RepoActivity
 import com.sarkisian.gh.util.extensions.*
+import com.sarkisian.gh.util.rxbus.RxBus
 import kotlinx.android.synthetic.main.fragment_repo_list.*
-import org.koin.android.ext.android.get
+import org.koin.android.ext.android.inject
 
 
 class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
     RepoAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-    private var repoListPresenter: RepoListContract.RepoListPresenter = get()
+    private val repoListPresenter by inject<RepoListContract.RepoListPresenter>()
+
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var repoAdapter: RepoAdapter
 

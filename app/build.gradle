@@ -109,9 +109,9 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
 
     // Koin
-    implementation "org.koin:koin-core:2.0.0-rc-2"
-    implementation "org.koin:koin-core-ext:2.0.0-rc-2"
+//    implementation "org.koin:koin-core:2.0.0-rc-2"
+//    implementation "org.koin:koin-core-ext:2.0.0-rc-2"
     implementation "org.koin:koin-android:2.0.0-rc-2"
-    implementation "org.koin:koin-android-scope:2.0.0-rc-2"
+//    implementation "org.koin:koin-android-scope:2.0.0-rc-2"
 
 }

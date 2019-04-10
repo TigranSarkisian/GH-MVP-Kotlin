@@ -6,7 +6,7 @@ import io.reactivex.subjects.PublishSubject
 
 class RxBus {
 
-    val bus: PublishSubject<Any> = PublishSubject.create<Any>()
+    private val bus: PublishSubject<Any> = PublishSubject.create<Any>()
 
     fun post(any: Any) = bus.onNext(any)
 

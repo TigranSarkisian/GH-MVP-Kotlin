@@ -1,24 +1,22 @@
 package com.sarkisian.gh.data.repository
 
+import com.sarkisian.gh.data.entity.Optional
 import com.sarkisian.gh.data.entity.Repo
 import com.sarkisian.gh.data.entity.SearchRequest
 import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.Single
 
 
 interface GitHubDataSource {
 
-    fun getRepos(gitHubUser: String, page: Int = 1): Observable<MutableList<Repo>>
+    fun getRepo(gitHubUser: String, repoName: String): Single<Optional<Repo>>
 
-    fun addRepos(repos: List<Repo>): Completable
+    fun getRepos(gitHubUser: String): Single<MutableList<Repo>>
 
-    fun getRepo(gitHubUser: String, repoName: String): Observable<Repo>
-
-    fun addRepo(repo: Repo): Completable
+    fun insertOrUpdateRepos(repos: List<Repo>): Completable
 
     fun deleteRepo(repo: Repo): Completable
-
-    fun updateRepo(repo: Repo): Completable
 
     fun addRepoToFavorites(repo: Repo): Completable
 
@@ -26,8 +24,6 @@ interface GitHubDataSource {
 
     fun getFavoriteRepos(gitHubUser: String): Observable<MutableList<Repo>>
 
-    fun searchRepos(query: String, page: Int): Observable<SearchRequest>
-
-    fun refreshRepos()
+    fun searchRepos(query: String): Single<SearchRequest>
 
 }

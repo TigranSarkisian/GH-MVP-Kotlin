@@ -10,9 +10,12 @@ import dagger.android.ContributesAndroidInjector
 abstract class BuildersModule {
 
     @ActivityScoped
-    @ContributesAndroidInjector(modules = arrayOf(
-        ReposModule::class, RepoFavoritesModule::class,
-            SearchModule::class))
+    @ContributesAndroidInjector(
+        modules = arrayOf(
+            ReposModule::class, RepoFavoritesModule::class,
+            SearchModule::class
+        )
+    )
     abstract fun bindMainActivity(): MainActivity
 
     @ActivityScoped

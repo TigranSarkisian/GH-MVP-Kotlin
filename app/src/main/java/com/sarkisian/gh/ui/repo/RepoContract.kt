@@ -9,11 +9,11 @@ class RepoContract {
 
     interface RepoView : MvpView {
 
-        fun showRepo(repo: Repo)
+        fun onRepoLoaded(repo: Repo)
 
-        fun showRepoDeleted(repo: Repo)
+        fun onRepoDeleted(repo: Repo)
 
-        fun showRepoUpdated(repo: Repo)
+        fun onRepoUpdated(repo: Repo)
 
     }
 

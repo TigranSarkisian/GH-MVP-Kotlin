@@ -21,8 +21,8 @@ fun String.formatDate(): String {
 }
 
 fun Long.formatTimeMillisToISO(): String =
-        SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.getDefault())
-                .format(this).toString()
+    SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'", Locale.getDefault())
+        .format(this).toString()
 
 fun Date.formatDate(resources: Resources): String {
     val localMillis = DateTimeZone.getDefault().convertUTCToLocal(this.time)

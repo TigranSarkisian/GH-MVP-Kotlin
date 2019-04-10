@@ -18,7 +18,8 @@ class RepoActivity : BaseActivity(), RepoContract.RepoView, View.OnClickListener
     override val layoutResource: Int
         get() = R.layout.activity_repo
 
-    @Inject lateinit var repoPresenter: RepoContract.RepoPresenter
+    @Inject
+    lateinit var repoPresenter: RepoContract.RepoPresenter
     private var gitHubRepo: Repo? = null
     private var menu: Menu? = null
 
@@ -30,7 +31,6 @@ class RepoActivity : BaseActivity(), RepoContract.RepoView, View.OnClickListener
 
         val repoName = getStringExtra(Repo.REPO_NAME)
         val repoOwner = getStringExtra(Owner.OWNER_LOGIN)
-
         repoPresenter.loadRepo(repoOwner, repoName)
     }
 
@@ -90,7 +90,7 @@ class RepoActivity : BaseActivity(), RepoContract.RepoView, View.OnClickListener
         }
     }
 
-    override fun showRepo(repo: Repo) {
+    override fun onRepoLoaded(repo: Repo) {
         gitHubRepo = repo
 
         setUpMenu(menu)
@@ -111,11 +111,11 @@ class RepoActivity : BaseActivity(), RepoContract.RepoView, View.OnClickListener
          */
     }
 
-    override fun showRepoDeleted(repo: Repo) {
+    override fun onRepoDeleted(repo: Repo) {
         finish()
     }
 
-    override fun showRepoUpdated(repo: Repo) {
+    override fun onRepoUpdated(repo: Repo) {
         edt_repo_name.visible(false)
         tv_repo_name.visible(true)
         tv_repo_name.text = repo.name

@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.repo_item.view.*
 
 
 class RepoAdapter(
-        private val onItemClickListener: OnItemClickListener
+    private val onItemClickListener: OnItemClickListener
 ) : BaseAdapter<Repo, RepoAdapter.ViewHolder>() {
 
     override fun getItemViewId(): Int = R.layout.repo_item
@@ -28,20 +28,18 @@ class RepoAdapter(
     fun setItems(items: MutableList<Repo>, onComplete: () -> Unit): Disposable {
         var newList: MutableList<Repo> = mutableListOf()
         return Observable.just(items)
-                .subscribeOn(Schedulers.io())
-                .doOnNext { newList = it }
-                .map { DiffUtil.calculateDiff(RepoDiffCallback(this.items, it)) }
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnNext { this.items = newList }
-                .doAfterTerminate {
-                    onComplete()
-                }
-                .subscribe { it.dispatchUpdatesTo(this) }
+            .subscribeOn(Schedulers.io())
+            .doOnNext { newList = it }
+            .map { DiffUtil.calculateDiff(RepoDiffCallback(this.items, it)) }
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnNext { this.items = newList }
+            .doAfterTerminate { onComplete() }
+            .subscribe { it.dispatchUpdatesTo(this) }
     }
 
     class ViewHolder(
-            itemView: View,
-            private var onItemClickListener: OnItemClickListener
+        itemView: View,
+        private var onItemClickListener: OnItemClickListener
     ) : BaseViewHolder<Repo>(itemView) {
 
         override fun onBind(item: Repo) = with(itemView) {

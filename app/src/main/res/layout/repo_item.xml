@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:id="@+id/ll_repo_item_container"
               xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/ll_repo_item_container"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="?attr/selectableItemBackground"
@@ -10,49 +10,49 @@
               android:padding="10dp">
 
     <LinearLayout
-        android:layout_weight="1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_repo_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        tools:text="@tools:sample/first_names"/>
+        <TextView
+                android:id="@+id/tv_repo_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:text="@tools:sample/first_names"/>
 
-    <TextView
-        android:id="@+id/tv_repo_updated_at"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:singleLine="false"
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
-        tools:text="@tools:sample/lorem"/>
+        <TextView
+                android:id="@+id/tv_repo_updated_at"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="false"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                tools:text="@tools:sample/lorem"/>
 
-    <TextView
-        android:id="@+id/tv_repo_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:singleLine="false"
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
-        tools:text="@tools:sample/lorem"/>
+        <TextView
+                android:id="@+id/tv_repo_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="false"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                tools:text="@tools:sample/lorem"/>
 
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/iv_repo_fav"
-        android:layout_weight="0"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_favorite_gray"/>
+            android:id="@+id/iv_repo_fav"
+            android:layout_weight="0"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_favorite_gray"/>
 
 </LinearLayout>

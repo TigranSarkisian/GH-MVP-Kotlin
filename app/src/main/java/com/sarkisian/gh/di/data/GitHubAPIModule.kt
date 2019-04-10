@@ -4,7 +4,7 @@ import com.sarkisian.gh.data.api.ApiFactory
 import com.sarkisian.gh.data.api.ApiFactory.BASE_URL
 import org.koin.dsl.module
 
-object APIModule {
+object GitHubAPIModule {
 
     val module = module {
         single { ApiFactory.getGitHubAPI(BASE_URL) }

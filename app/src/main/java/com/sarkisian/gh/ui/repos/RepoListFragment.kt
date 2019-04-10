@@ -38,11 +38,15 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
         repoListPresenter.attachView(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        container?.inflate(R.layout.fragment_repo_list)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+       ): View? = container?.inflate(R.layout.fragment_repo_list)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         srl_repo_list.setOnRefreshListener(this@RepoListFragment)
 
         rv_repo_list.apply {
@@ -51,34 +55,28 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
             setHasFixedSize(true)
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
             (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
-            onScrollToBottom { repoListPresenter.loadNextPage() }
         }
 
         repoAdapter = RepoAdapter(this@RepoListFragment)
         rv_repo_list.adapter = repoAdapter
-        repoListPresenter.loadRepos(GIT_HUB_USER, true)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        repoListPresenter.loadRepos(GIT_HUB_USER)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.add_repo -> {
-                val newRepo = Repo(
-                    id = System.currentTimeMillis(),
-                    name = "Repo ${System.currentTimeMillis()}",
-                    language = "Kotlin",
-                    htmlUrl = "http://www.nourl.com/",
-                    description = "This is test repo created with id ${System.currentTimeMillis()}",
-                    updatedAt = System.currentTimeMillis().formatTimeMillisToISO()
-                )
-                repoListPresenter.addRepo(newRepo)
+                repoListPresenter.addRepo(Repo.composeStubRepo())
             }
         }
         return true
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) =
         inflater.inflate(R.menu.repo_list_fragment_menu, menu)
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -86,36 +84,27 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
     }
 
     override fun onRefresh() {
-        repoListPresenter.loadRepos(GIT_HUB_USER, true)
+        repoListPresenter.loadRepos(GIT_HUB_USER)
     }
 
-    override fun showRepos(repoList: MutableList<Repo>) {
-        repoAdapter.setItems(repoList) {
-            if (repoList.isNotEmpty()) rv_repo_list.post {
-                rv_repo_list.ifNotScrollable { repoListPresenter.loadNextPage() }
-            }
-        }
+    override fun onReposLoaded(repoList: MutableList<Repo>) {
+        repoAdapter.setItems(repoList) {}
     }
 
-    override fun showNextPageRepos(repoList: MutableList<Repo>) {
-        val positionStart = repoAdapter.items.size
-        repoAdapter.insertItems(positionStart, repoList)
-    }
-
-    override fun showRepoDeleted(repo: Repo) {
+    override fun onRepoDeleted(repo: Repo) {
         repoAdapter.removeItem(repo)
         if (repoAdapter.itemCount == 0) {
             showEmptyState(true)
         }
     }
 
-    override fun showRepoAdded(repo: Repo) {
+    override fun onRepoAdded(repo: Repo) {
         val insertedPosition = repoAdapter.insertItem(repo)
         rv_repo_list.smoothScrollToPosition(insertedPosition)
         showEmptyState(false)
     }
 
-    override fun showRepoUpdated(repo: Repo) {
+    override fun onRepoUpdated(repo: Repo) {
         repoAdapter.updateItem(repo)
     }
 
@@ -125,15 +114,6 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
             false -> {
                 srl_repo_list.isRefreshing = false
                 setActionBarTitle(getString(R.string.screen_list))
-            }
-        }
-    }
-
-    override fun showNextPageLoadingIndicator(value: Boolean) {
-        when (value) {
-            true -> {
-            }
-            false -> {
             }
         }
     }

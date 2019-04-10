@@ -9,19 +9,25 @@ class RepoListContract {
 
     interface RepoListView : MvpView {
 
-        fun onReposLoaded(repoList: MutableList<Repo>)
+        fun showRepos(repoList: MutableList<Repo>)
 
-        fun onRepoDeleted(repo: Repo)
+        fun showNextPageRepos(repoList: MutableList<Repo>)
 
-        fun onRepoAdded(repo: Repo)
+        fun showNextPageLoadingIndicator(value: Boolean)
 
-        fun onRepoUpdated(repo: Repo)
+        fun showRepoDeleted(repo: Repo)
+
+        fun showRepoAdded(repo: Repo)
+
+        fun showRepoUpdated(repo: Repo)
 
     }
 
     interface RepoListPresenter : MvpPresenter<RepoListView> {
 
-        fun loadRepos(username: String)
+        fun loadRepos(username: String, forceUpdate: Boolean = false)
+
+        fun loadNextPage()
 
         fun deleteRepo(repo: Repo)
 

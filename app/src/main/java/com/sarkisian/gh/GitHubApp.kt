@@ -29,10 +29,10 @@ class GitHubApp : Application(), HasActivityInjector {
         RealmFactory.init(this)
         RxJavaPlugins.setErrorHandler { throwable -> Timber.e(throwable.toString()) }
         DaggerAppComponent
-            .builder()
-            .application(this)
-            .build()
-            .inject(this)
+                .builder()
+                .application(this)
+                .build()
+                .inject(this)
     }
 
     private fun installLeakCanary() {
@@ -44,12 +44,10 @@ class GitHubApp : Application(), HasActivityInjector {
 
     private fun turnOnStrictMode() {
         if (BuildConfig.DEBUG) {
-            StrictMode.setThreadPolicy(
-                StrictMode.ThreadPolicy.Builder()
+            StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
                     .detectAll()
                     .penaltyLog()
-                    .build()
-            )
+                    .build())
         }
     }
 

@@ -52,10 +52,7 @@ class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavorite
 
         repoAdapter = RepoAdapter(this@RepoFavoritesFragment)
         rv_repo_favorites.adapter = repoAdapter
-    }
 
-    override fun onResume() {
-        super.onResume()
         repoFavoritesPresenter.loadFavoriteRepos(GIT_HUB_USER)
     }
 

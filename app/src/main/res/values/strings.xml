@@ -35,6 +35,4 @@
     <string name="action_delete">Delete</string>
     <string name="action_favorite">Favorite</string>
     <string name="status_updating">Updating…</string>
-    <string name="hint_search">Search</string>
-    <string name="failed_to_load_repo">Failed to load repo</string>
 </resources>

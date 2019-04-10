@@ -7,24 +7,24 @@
              android:orientation="vertical">
 
     <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/srl_repo_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:id="@+id/srl_repo_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_repo_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/repo_item"/>
+            android:id="@+id/rv_repo_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/repo_item"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
     <include
-            android:id="@+id/repo_list_empty_state"
-            layout="@layout/view_empty_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
+        android:id="@+id/repo_list_empty_state"
+        layout="@layout/view_empty_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
 </FrameLayout>

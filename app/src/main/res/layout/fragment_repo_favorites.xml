@@ -7,17 +7,17 @@
              android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_repo_favorites"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/repo_item"/>
+        android:id="@+id/rv_repo_favorites"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/repo_item"/>
 
     <include
-            android:id="@+id/repo_favorites_empty_state"
-            layout="@layout/view_empty_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
+        android:id="@+id/repo_favorites_empty_state"
+        layout="@layout/view_empty_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
 </FrameLayout>

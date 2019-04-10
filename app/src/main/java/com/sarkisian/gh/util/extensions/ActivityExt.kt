@@ -11,9 +11,9 @@ import android.widget.Toast
 
 
 fun AppCompatActivity.switchFragment(
-    fragment: Fragment,
-    frameId: Int,
-    addToBackStack: Boolean = false
+        fragment: Fragment,
+        frameId: Int,
+        addToBackStack: Boolean = false
 ) {
     val existingFragment = supportFragmentManager.findFragmentByTag(fragment.name())
     val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -22,9 +22,7 @@ fun AppCompatActivity.switchFragment(
         if (existingFragment != null) {
             fragmentTransaction.show(existingFragment)
         } else {
-            if (addToBackStack) {
-                fragmentTransaction.addToBackStack(fragment.javaClass.simpleName)
-            }
+            if (addToBackStack) fragmentTransaction.addToBackStack(fragment.javaClass.simpleName)
             fragmentTransaction.add(frameId, fragment, fragment.name())
         }
 
@@ -34,10 +32,10 @@ fun AppCompatActivity.switchFragment(
         }
 
         fragmentTransaction.setPrimaryNavigationFragment(
-            when (existingFragment) {
-                null -> fragment
-                else -> existingFragment
-            }
+                when (existingFragment) {
+                    null -> fragment
+                    else -> existingFragment
+                }
         )
         fragmentTransaction.setReorderingAllowed(true)
         fragmentTransaction.commitAllowingStateLoss()
@@ -45,9 +43,9 @@ fun AppCompatActivity.switchFragment(
 }
 
 fun AppCompatActivity.addFragment(
-    fragment: Fragment,
-    frameId: Int,
-    addToBackStack: Boolean = false
+        fragment: Fragment,
+        frameId: Int,
+        addToBackStack: Boolean = false
 ) {
     var transactionFragment = fragment
     val existingFragment = supportFragmentManager.findFragmentByTag(fragment.name())
@@ -58,20 +56,18 @@ fun AppCompatActivity.addFragment(
     }
 
     if (!supportFragmentManager.isStateSaved) {
-        if (addToBackStack) {
-            fragmentTransaction
+        if (addToBackStack) fragmentTransaction
                 .addToBackStack(transactionFragment.javaClass.simpleName)
-        }
         fragmentTransaction
-            .add(frameId, transactionFragment, transactionFragment.name())
-            .commit()
+                .add(frameId, transactionFragment, transactionFragment.name())
+                .commit()
     }
 }
 
 fun AppCompatActivity.replaceFragment(
-    fragment: Fragment,
-    frameId: Int,
-    addToBackStack: Boolean = false
+        fragment: Fragment,
+        frameId: Int,
+        addToBackStack: Boolean = false
 ) {
     var transactionFragment = fragment
     val existingFragment = supportFragmentManager.findFragmentByTag(fragment.name())
@@ -82,13 +78,11 @@ fun AppCompatActivity.replaceFragment(
     }
 
     if (!supportFragmentManager.isStateSaved) {
-        if (addToBackStack){
-            fragmentTransaction
+        if (addToBackStack) fragmentTransaction
                 .addToBackStack(transactionFragment.javaClass.simpleName)
-        }
         fragmentTransaction
-            .replace(frameId, transactionFragment, transactionFragment.name())
-            .commit()
+                .replace(frameId, transactionFragment, transactionFragment.name())
+                .commit()
     }
 }
 
@@ -113,10 +107,6 @@ fun AppCompatActivity.snack(msg: String) {
 }
 
 fun AppCompatActivity.getStringExtra(key: String): String {
-    return intent.extras?.let {
-        it.getString(key, emptyString())
-    } ?: kotlin.run {
-        emptyString()
-    }
+    return intent.extras.getString(key, emptyString())
 }
 

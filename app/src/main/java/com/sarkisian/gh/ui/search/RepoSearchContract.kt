@@ -1,7 +1,6 @@
 package com.sarkisian.gh.ui.search
 
 
-import com.jakewharton.rxbinding2.InitialValueObservable
 import com.sarkisian.gh.data.entity.Repo
 import com.sarkisian.gh.ui.base.mvp.MvpPresenter
 import com.sarkisian.gh.ui.base.mvp.MvpView
@@ -10,14 +9,24 @@ class RepoSearchContract {
 
     interface RepoSearchView : MvpView {
 
-        fun onSearchResultRetrieved(repoList: MutableList<Repo>)
+        fun showSearchResult(repoList: MutableList<Repo>)
 
+        fun showSearchCleared()
+
+        fun showNextPageRepos(repoList: MutableList<Repo>)
+
+        fun showNextPageLoadingIndicator(value: Boolean)
     }
 
     interface RepoSearchPresenter : MvpPresenter<RepoSearchView> {
 
-        fun searchRepos(searchObservable: InitialValueObservable<CharSequence>)
+        fun processInput(query: String)
 
+        fun searchRepos(query: String)
+
+        fun loadNextPage()
+
+        fun clearSearch()
     }
 
 }

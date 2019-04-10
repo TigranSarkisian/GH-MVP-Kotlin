@@ -7,12 +7,12 @@ import io.realm.annotations.PrimaryKey
 
 open class Owner(
 
-    @PrimaryKey
-    @SerializedName("id")
-    var id: Long? = null,
+        @PrimaryKey
+        @SerializedName("id")
+        var id: Long? = null,
 
-    @SerializedName("login")
-    var login: String? = null
+        @SerializedName("login")
+        var login: String? = null
 
 ) : RealmObject() {
 

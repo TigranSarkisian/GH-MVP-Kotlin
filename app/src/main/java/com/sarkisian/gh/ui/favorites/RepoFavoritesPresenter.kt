@@ -13,8 +13,8 @@ class RepoFavoritesPresenter constructor(
     private val errorHandler: ErrorHandler
 ) : BasePresenter<RepoFavoritesContract.RepoFavoritesView>(), RepoFavoritesContract.RepoFavoritesPresenter {
 
-    override fun loadFavoriteRepos(username: String) {
-        gitHubRepository.getFavoriteRepos(username)
+    override fun loadFavoriteRepos() {
+        gitHubRepository.getFavoriteRepos()
             .doOnSubscribe { view?.showLoadingIndicator(true) }
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterTerminate { view?.showLoadingIndicator(false) }

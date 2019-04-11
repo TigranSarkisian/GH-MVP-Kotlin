@@ -22,7 +22,7 @@ interface GitHubDataSource {
 
     fun deleteRepoFromFavorites(repo: Repo): Completable
 
-    fun getFavoriteRepos(gitHubUser: String): Observable<MutableList<Repo>>
+    fun getFavoriteRepos(): Observable<MutableList<Repo>>
 
     fun searchRepos(query: String): Single<SearchRequest>
 

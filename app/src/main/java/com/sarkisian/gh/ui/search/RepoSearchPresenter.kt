@@ -4,6 +4,7 @@ package com.sarkisian.gh.ui.search
 import com.jakewharton.rxbinding2.InitialValueObservable
 import com.sarkisian.gh.data.repository.GitHubDataSource
 import com.sarkisian.gh.ui.base.mvp.BasePresenter
+import com.sarkisian.gh.util.error.ErrorHandler
 import com.sarkisian.gh.util.extensions.addTo
 import io.reactivex.BackpressureStrategy
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -11,7 +12,8 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class RepoSearchPresenter constructor(
-    private val gitHubRepository: GitHubDataSource
+    private val gitHubRepository: GitHubDataSource,
+    private val errorHandler: ErrorHandler
 ) : BasePresenter<RepoSearchContract.RepoSearchView>(), RepoSearchContract.RepoSearchPresenter {
 
     override fun searchRepos(searchObservable: InitialValueObservable<CharSequence>) {
@@ -27,10 +29,12 @@ class RepoSearchPresenter constructor(
             .map { it.items }
             .onErrorReturn { mutableListOf() }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+            .subscribe({
                 view?.showEmptyState(it.isEmpty())
                 view?.onSearchResultRetrieved(it)
-            }
+            }, {
+                errorHandler.readError(it) { view?.showMessage(it) }
+            })
             .addTo(compositeDisposable)
     }
 

@@ -21,7 +21,7 @@ class RepoFavoritesContract {
 
     interface RepoFavoritesPresenter : MvpPresenter<RepoFavoritesView> {
 
-        fun loadFavoriteRepos(username: String)
+        fun loadFavoriteRepos()
 
         fun deleteRepoFromFavorites(repo: Repo)
 

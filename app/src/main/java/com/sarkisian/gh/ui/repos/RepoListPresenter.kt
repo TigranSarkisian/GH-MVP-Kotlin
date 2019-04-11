@@ -30,21 +30,33 @@ class RepoListPresenter constructor(
     override fun deleteRepo(repo: Repo) {
         gitHubRepository.deleteRepo(repo)
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { view?.onRepoDeleted(repo) }
+            .subscribe({
+                view?.onRepoDeleted(repo)
+            }, {
+                errorHandler.readError(it) { view?.showMessage(it) }
+            })
             .addTo(compositeDisposable)
     }
 
     override fun addRepo(repo: Repo) {
         gitHubRepository.insertOrUpdateRepos(listOf(repo))
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { view?.onRepoAdded(repo) }
+            .subscribe({
+                view?.onRepoAdded(repo)
+            }, {
+                errorHandler.readError(it) { view?.showMessage(it) }
+            })
             .addTo(compositeDisposable)
     }
 
     override fun updateRepo(repo: Repo) {
         gitHubRepository.insertOrUpdateRepos(listOf(repo))
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { view?.onRepoUpdated(repo) }
+            .subscribe({
+                view?.onRepoUpdated(repo)
+            }, {
+                errorHandler.readError(it) { view?.showMessage(it) }
+            })
             .addTo(compositeDisposable)
     }
 

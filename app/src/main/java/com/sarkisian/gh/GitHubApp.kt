@@ -3,13 +3,10 @@ package com.sarkisian.gh
 import android.app.Application
 import android.os.StrictMode
 import com.sarkisian.gh.data.db.RealmFactory
-import com.sarkisian.gh.di.AppModule
-import com.sarkisian.gh.di.data.GitHubAPIModule
-import com.sarkisian.gh.di.data.GitHubRepositoryModule
-import com.sarkisian.gh.di.mvp.RepoFavoritesModule
-import com.sarkisian.gh.di.mvp.RepoModule
-import com.sarkisian.gh.di.mvp.ReposModule
-import com.sarkisian.gh.di.mvp.SearchModule
+import com.sarkisian.gh.di.AppModule.apiModule
+import com.sarkisian.gh.di.AppModule.appModule
+import com.sarkisian.gh.di.AppModule.mvpModule
+import com.sarkisian.gh.di.AppModule.repositoryModule
 import com.squareup.leakcanary.LeakCanary
 import io.reactivex.plugins.RxJavaPlugins
 import org.koin.android.ext.koin.androidContext
@@ -31,15 +28,7 @@ class GitHubApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@GitHubApp)
-            modules(
-                AppModule.module,
-                GitHubRepositoryModule.module,
-                GitHubAPIModule.module,
-                ReposModule.module,
-                RepoFavoritesModule.module,
-                RepoModule.module,
-                SearchModule.module
-            )
+            modules(appModule, apiModule, repositoryModule, mvpModule)
         }
     }
 

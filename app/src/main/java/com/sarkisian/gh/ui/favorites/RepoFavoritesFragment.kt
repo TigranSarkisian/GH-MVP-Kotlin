@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sarkisian.gh.R
-import com.sarkisian.gh.data.api.ApiFactory.GIT_HUB_USER
 import com.sarkisian.gh.data.entity.Owner
 import com.sarkisian.gh.data.entity.Repo
 import com.sarkisian.gh.ui.adapter.RepoAdapter
@@ -17,12 +16,12 @@ import com.sarkisian.gh.ui.base.BaseFragment
 import com.sarkisian.gh.ui.repo.RepoActivity
 import com.sarkisian.gh.util.extensions.*
 import kotlinx.android.synthetic.main.fragment_repo_favorites.*
-import org.koin.android.ext.android.inject
+import org.koin.android.scope.currentScope
 
 class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavoritesView,
     RepoAdapter.OnItemClickListener {
 
-    private val repoFavoritesPresenter by inject<RepoFavoritesContract.RepoFavoritesPresenter>()
+    private val repoFavoritesPresenter by currentScope.inject<RepoFavoritesContract.RepoFavoritesPresenter>()
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var repoAdapter: RepoAdapter
 
@@ -56,7 +55,7 @@ class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavorite
 
     override fun onResume() {
         super.onResume()
-        repoFavoritesPresenter.loadFavoriteRepos(GIT_HUB_USER)
+        repoFavoritesPresenter.loadFavoriteRepos()
     }
 
     override fun onDestroyView() {

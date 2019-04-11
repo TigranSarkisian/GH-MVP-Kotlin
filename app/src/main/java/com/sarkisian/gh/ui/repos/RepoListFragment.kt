@@ -17,13 +17,13 @@ import com.sarkisian.gh.ui.base.BaseFragment
 import com.sarkisian.gh.ui.repo.RepoActivity
 import com.sarkisian.gh.util.extensions.*
 import kotlinx.android.synthetic.main.fragment_repo_list.*
-import org.koin.android.ext.android.inject
+import org.koin.android.scope.currentScope
 
 
 class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
     RepoAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-    private val repoListPresenter by inject<RepoListContract.RepoListPresenter>()
+    private val repoListPresenter by currentScope.inject<RepoListContract.RepoListPresenter>()
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var repoAdapter: RepoAdapter
 

@@ -11,11 +11,11 @@ import com.sarkisian.gh.data.entity.Repo
 import com.sarkisian.gh.ui.base.BaseActivity
 import com.sarkisian.gh.util.extensions.*
 import kotlinx.android.synthetic.main.activity_repo.*
-import org.koin.android.ext.android.inject
+import org.koin.android.scope.currentScope
 
 class RepoActivity : BaseActivity(), RepoContract.RepoView, View.OnClickListener {
 
-    private val repoPresenter by inject<RepoContract.RepoPresenter>()
+    private val repoPresenter by currentScope.inject<RepoContract.RepoPresenter>()
     private var gitHubRepo: Repo? = null
     private var menu: Menu? = null
 

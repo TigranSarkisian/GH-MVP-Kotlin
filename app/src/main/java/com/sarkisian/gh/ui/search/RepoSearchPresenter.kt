@@ -14,7 +14,8 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class RepoSearchPresenter @Inject constructor(
-    private val gitHubRepository: GitHubDataSource
+    private val gitHubRepository: GitHubDataSource,
+    private val errorHandler: ErrorHandler
 ) : BasePresenter<RepoSearchContract.RepoSearchView>(), RepoSearchContract.RepoSearchPresenter {
 
     override fun searchRepos(searchObservable: InitialValueObservable<CharSequence>) {
@@ -30,10 +31,12 @@ class RepoSearchPresenter @Inject constructor(
             .map { it.items }
             .onErrorReturn { mutableListOf() }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+            .subscribe({
                 view?.showEmptyState(it.isEmpty())
                 view?.onSearchResultRetrieved(it)
-            }
+            }, {
+                errorHandler.readError(it) { view?.showMessage(it) }
+            })
             .addTo(compositeDisposable)
     }
 

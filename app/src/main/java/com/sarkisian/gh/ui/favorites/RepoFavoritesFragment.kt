@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sarkisian.gh.R
-import com.sarkisian.gh.data.api.ApiFactory.GIT_HUB_USER
 import com.sarkisian.gh.data.entity.Owner
 import com.sarkisian.gh.data.entity.Repo
 import com.sarkisian.gh.di.scope.ActivityScoped
@@ -56,7 +55,7 @@ class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavorite
 
     override fun onResume() {
         super.onResume()
-        repoFavoritesPresenter.loadFavoriteRepos(GIT_HUB_USER)
+        repoFavoritesPresenter.getFavoriteRepos()
     }
 
     override fun onDestroyView() {
@@ -64,23 +63,23 @@ class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavorite
         repoFavoritesPresenter.detachView()
     }
 
-    override fun showFavoriteRepos(repoList: MutableList<Repo>) {
+    override fun onFavoriteReposLoaded(repoList: MutableList<Repo>) {
         repoAdapter.setItems(repoList) {}
     }
 
-    override fun showRepoDeletedFromFavorites(repo: Repo) {
+    override fun onRepoDeletedFromFavorites(repo: Repo) {
         repoAdapter.removeItem(repo)
         if (repoAdapter.itemCount == 0) {
             showEmptyState(true)
         }
     }
 
-    override fun showRepoAddedToFavorites(repo: Repo) {
+    override fun onRepoAddedToFavorites(repo: Repo) {
         repoAdapter.insertItem(repo)
         showEmptyState(false)
     }
 
-    override fun showRepoUpdated(repo: Repo) {
+    override fun onRepoUpdated(repo: Repo) {
         repoAdapter.updateItem(repo)
     }
 

@@ -13,13 +13,13 @@ class RepoFavoritesPresenter constructor(
     private val errorHandler: ErrorHandler
 ) : BasePresenter<RepoFavoritesContract.RepoFavoritesView>(), RepoFavoritesContract.RepoFavoritesPresenter {
 
-    override fun loadFavoriteRepos() {
+    override fun getFavoriteRepos() {
         gitHubRepository.getFavoriteRepos()
             .doOnSubscribe { view?.showLoadingIndicator(true) }
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterTerminate { view?.showLoadingIndicator(false) }
             .subscribe({
-                view?.showFavoriteRepos(it)
+                view?.onFavoriteReposLoaded(it)
                 view?.showEmptyState(it.isEmpty())
             }, {
                 errorHandler.readError(it) { view?.showMessage(it) }
@@ -31,7 +31,7 @@ class RepoFavoritesPresenter constructor(
         gitHubRepository.deleteRepoFromFavorites(repo)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                view?.showRepoDeletedFromFavorites(repo)
+                view?.onRepoDeletedFromFavorites(repo)
             }, {
                 errorHandler.readError(it) { view?.showMessage(it) }
             })

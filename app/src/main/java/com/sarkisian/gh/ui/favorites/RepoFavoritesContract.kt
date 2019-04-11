@@ -9,19 +9,19 @@ class RepoFavoritesContract {
 
     interface RepoFavoritesView : MvpView {
 
-        fun showFavoriteRepos(repoList: MutableList<Repo>)
+        fun onFavoriteReposLoaded(repoList: MutableList<Repo>)
 
-        fun showRepoDeletedFromFavorites(repo: Repo)
+        fun onRepoDeletedFromFavorites(repo: Repo)
 
-        fun showRepoAddedToFavorites(repo: Repo)
+        fun onRepoAddedToFavorites(repo: Repo)
 
-        fun showRepoUpdated(repo: Repo)
+        fun onRepoUpdated(repo: Repo)
 
     }
 
     interface RepoFavoritesPresenter : MvpPresenter<RepoFavoritesView> {
 
-        fun loadFavoriteRepos()
+        fun getFavoriteRepos()
 
         fun deleteRepoFromFavorites(repo: Repo)
 

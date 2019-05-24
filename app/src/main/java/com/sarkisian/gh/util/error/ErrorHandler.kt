@@ -14,7 +14,6 @@ class ErrorHandler constructor(private val context: Context) {
 
         messageListener(
             when (error) {
-                is IOException -> context.getString(R.string.network_error)
                 is HttpException -> when (error.code()) {
                     304 -> context.getString(R.string.not_modified_error)
                     400 -> context.getString(R.string.bad_request_error)
@@ -24,11 +23,11 @@ class ErrorHandler constructor(private val context: Context) {
                     405 -> context.getString(R.string.method_not_allowed_error)
                     409 -> context.getString(R.string.conflict_error)
                     422 -> context.getString(R.string.unprocessable_error)
-                    500 -> context.getString(R.string.server_error_error)
-                    else -> context.getString(R.string.unknown_error)
+                    in 500..511 -> context.getString(R.string.server_error)
+                    else -> context.getString(R.string.network_error)
                 }
-                is ObjectNotFoundException -> error.message
-                else -> context.getString(R.string.unknown_error)
+                is IOException -> context.getString(R.string.network_connection_error)
+                else -> context.getString(R.string.unknown_network_error)
             }
         )
     }

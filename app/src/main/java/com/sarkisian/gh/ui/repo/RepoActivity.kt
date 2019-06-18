@@ -28,8 +28,9 @@ class RepoActivity : BaseActivity(), RepoContract.RepoView, View.OnClickListener
 
         fab_edit.setOnClickListener(this)
 
-        val repoName = getStringExtra(Repo.REPO_NAME)
-        val repoOwner = getStringExtra(Owner.OWNER_LOGIN)
+        val repoName = intent.extras?.getString(Repo.REPO_NAME)
+        val repoOwner = intent.extras?.getString(Owner.OWNER_LOGIN)
+
         repoPresenter.loadRepo(repoOwner, repoName)
     }
 

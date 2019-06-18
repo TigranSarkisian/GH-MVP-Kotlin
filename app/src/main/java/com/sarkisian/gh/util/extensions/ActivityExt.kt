@@ -82,7 +82,7 @@ fun AppCompatActivity.replaceFragment(
     }
 
     if (!supportFragmentManager.isStateSaved) {
-        if (addToBackStack){
+        if (addToBackStack) {
             fragmentTransaction
                 .addToBackStack(transactionFragment.javaClass.simpleName)
         }
@@ -111,12 +111,3 @@ fun AppCompatActivity.snack(msg: String) {
         Snackbar.make(it, msg, Snackbar.LENGTH_SHORT).show()
     }
 }
-
-fun AppCompatActivity.getStringExtra(key: String): String {
-    return intent.extras?.let {
-        it.getString(key, emptyString())
-    } ?: kotlin.run {
-        emptyString()
-    }
-}
-

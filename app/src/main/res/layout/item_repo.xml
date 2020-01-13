@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/ll_repo_item_container"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="?attr/selectableItemBackground"
-              android:orientation="horizontal"
-              android:padding="10dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/ll_repo_item_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
     <LinearLayout
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
         <TextView
@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
-                tools:text="@tools:sample/first_names"/>
+                tools:text="@tools:sample/first_names" />
 
         <TextView
                 android:id="@+id/tv_repo_updated_at"
@@ -32,7 +32,7 @@
                 android:singleLine="false"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
-                tools:text="@tools:sample/lorem"/>
+                tools:text="@tools:sample/lorem" />
 
         <TextView
                 android:id="@+id/tv_repo_description"
@@ -43,16 +43,16 @@
                 android:singleLine="false"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
-                tools:text="@tools:sample/lorem"/>
+                tools:text="@tools:sample/lorem" />
 
     </LinearLayout>
 
     <ImageView
             android:id="@+id/iv_repo_fav"
-            android:layout_weight="0"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_favorite_gray"/>
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            app:srcCompat="@drawable/ic_favorite_gray" />
 
 </LinearLayout>

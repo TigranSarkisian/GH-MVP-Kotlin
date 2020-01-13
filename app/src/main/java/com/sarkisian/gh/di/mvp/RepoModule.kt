@@ -11,6 +11,8 @@ abstract class RepoModule {
 
     @ActivityScoped
     @Binds
-    abstract fun repoPresenter(repoPresenter: RepoPresenter): RepoContract.RepoPresenter
+    abstract fun repoPresenter(
+        repoPresenter: RepoPresenter
+    ): RepoContract.RepoPresenter
 
 }

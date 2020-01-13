@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@android:color/white"
-             android:orientation="vertical">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
 
     <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/srl_repo_list"
@@ -15,7 +15,7 @@
                 android:id="@+id/rv_repo_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:listitem="@layout/repo_item"/>
+                tools:listitem="@layout/item_repo" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -25,6 +25,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
 </FrameLayout>

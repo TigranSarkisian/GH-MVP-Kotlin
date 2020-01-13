@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/cl_repo_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/cl_repo_container"
         tools:context=".ui.repo.RepoActivity">
 
     <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <include
-                layout="@layout/include_toolbar"/>
+        <include layout="@layout/include_toolbar" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -36,58 +34,58 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_launcher_background"/>
+                    app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
                     android:id="@+id/tv_repo_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="11dp"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="20dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="11dp"
                     android:textColor="@android:color/black"
                     android:textSize="26sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_repo_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="@tools:sample/lorem"/>
+                    tools:text="@tools:sample/lorem" />
 
             <EditText
                     android:id="@+id/edt_repo_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:textSize="26sp"
                     android:textStyle="bold"
                     android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_repo_logo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="@tools:sample/lorem"/>
+                    tools:text="@tools:sample/lorem" />
 
             <TextView
                     android:id="@+id/tv_repo_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_repo_logo"
-                    tools:text="@tools:sample/lorem"/>
+                    tools:text="@tools:sample/lorem" />
 
             <TextView
                     android:id="@+id/tv_repo_url"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="@android:color/black"
@@ -95,63 +93,63 @@
                     app:layout_constraintEnd_toEndOf="@+id/tv_repo_id"
                     app:layout_constraintStart_toStartOf="@+id/tv_repo_id"
                     app:layout_constraintTop_toBottomOf="@+id/tv_repo_id"
-                    tools:text="@tools:sample/lorem"/>
+                    tools:text="@tools:sample/lorem" />
 
             <TextView
                     android:id="@+id/tv_repo_language"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/tv_repo_url"
                     app:layout_constraintStart_toStartOf="@+id/tv_repo_url"
                     app:layout_constraintTop_toBottomOf="@+id/tv_repo_url"
-                    tools:text="@tools:sample/lorem"/>
+                    tools:text="@tools:sample/lorem" />
 
             <TextView
                     android:id="@+id/tv_repo_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/tv_repo_language"
                     app:layout_constraintStart_toStartOf="@+id/tv_repo_language"
                     app:layout_constraintTop_toBottomOf="@+id/tv_repo_language"
-                    tools:text="@tools:sample/lorem"/>
+                    tools:text="@tools:sample/lorem" />
 
             <TextView
                     android:id="@+id/tv_repo_network_count"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/tv_repo_description"
                     app:layout_constraintStart_toStartOf="@+id/tv_repo_description"
                     app:layout_constraintTop_toBottomOf="@+id/tv_repo_description"
-                    tools:text="@tools:sample/lorem"/>
+                    tools:text="@tools:sample/lorem" />
 
             <TextView
                     android:id="@+id/tv_repo_subscribers_count"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:textColor="@android:color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="@+id/tv_repo_network_count"
                     app:layout_constraintStart_toStartOf="@+id/tv_repo_network_count"
                     app:layout_constraintTop_toBottomOf="@+id/tv_repo_network_count"
-                    tools:text="@tools:sample/lorem"/>
+                    tools:text="@tools:sample/lorem" />
 
         </android.support.constraint.ConstraintLayout>
 
@@ -163,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="20dp"
-            android:src="@drawable/ic_mode_edit"/>
+            android:src="@drawable/ic_mode_edit" />
 
 </android.support.design.widget.CoordinatorLayout>
 

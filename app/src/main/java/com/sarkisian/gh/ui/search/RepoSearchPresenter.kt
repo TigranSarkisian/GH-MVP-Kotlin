@@ -7,14 +7,13 @@ import com.sarkisian.gh.ui.base.mvp.BasePresenter
 import com.sarkisian.gh.util.error.ErrorHandler
 import com.sarkisian.gh.util.extensions.addTo
 import io.reactivex.BackpressureStrategy
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class RepoSearchPresenter @Inject constructor(
-    private val gitHubRepository: GitHubDataSource,
+    private val repository: GitHubDataSource,
     private val errorHandler: ErrorHandler
 ) : BasePresenter<RepoSearchContract.RepoSearchView>(), RepoSearchContract.RepoSearchPresenter {
 
@@ -26,7 +25,7 @@ class RepoSearchPresenter @Inject constructor(
             .debounce(300, TimeUnit.MILLISECONDS)
             .doOnNext { Timber.i(it.toString()) }
             .toFlowable(BackpressureStrategy.LATEST)
-            .flatMap { gitHubRepository.searchRepos(it.toString()).toFlowable() }
+            .flatMap { repository.searchRepos(it.toString()).toFlowable() }
             .doOnNext { Timber.i("Search result size ${it.items.size}") }
             .map { it.items }
             .onErrorReturn { mutableListOf() }

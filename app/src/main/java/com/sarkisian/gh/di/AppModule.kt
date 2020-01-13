@@ -15,20 +15,15 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideContext(application: GitHubApp): Context {
-        return application.applicationContext
-    }
+    fun provideContext(application: GitHubApp): Context = application.applicationContext
 
     @Provides
     @Singleton
-    fun provideSharedPreferences(application: Application): SharedPreferences {
-        return PreferenceManager.getDefaultSharedPreferences(application)
-    }
+    fun provideSharedPreferences(application: Application): SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(application)
 
     @Provides
     @Singleton
-    fun provideErrorHandler(application: GitHubApp): ErrorHandler {
-        return ErrorHandler(application)
-    }
+    fun provideErrorHandler(application: GitHubApp): ErrorHandler = ErrorHandler(application)
 
 }

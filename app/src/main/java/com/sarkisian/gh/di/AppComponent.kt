@@ -11,13 +11,13 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = arrayOf(
+    modules = [
         AndroidSupportInjectionModule::class,
         BuildersModule::class,
         AppModule::class,
         GitHubAPIModule::class,
         GitHubRepositoryModule::class
-    )
+    ]
 )
 interface AppComponent {
 

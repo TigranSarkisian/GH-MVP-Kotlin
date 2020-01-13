@@ -12,8 +12,6 @@ class GitHubAPIModule {
 
     @Singleton
     @Provides
-    fun provideGitHubAPI(): GitHubAPI {
-        return ApiFactory.getGitHubAPI(BASE_URL)
-    }
+    fun provideGitHubAPI(): GitHubAPI = ApiFactory.getGitHubAPI(BASE_URL)
 
 }

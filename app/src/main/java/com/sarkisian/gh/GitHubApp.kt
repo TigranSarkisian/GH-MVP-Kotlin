@@ -23,6 +23,7 @@ class GitHubApp : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
+
         installLeakCanary()
         turnOnStrictMode()
         Timber.plant(Timber.DebugTree())

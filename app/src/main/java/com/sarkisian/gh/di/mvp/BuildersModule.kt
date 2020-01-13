@@ -11,15 +11,16 @@ abstract class BuildersModule {
 
     @ActivityScoped
     @ContributesAndroidInjector(
-        modules = arrayOf(
-            ReposModule::class, RepoFavoritesModule::class,
+        modules = [
+            ReposModule::class,
+            RepoFavoritesModule::class,
             SearchModule::class
-        )
+        ]
     )
     abstract fun bindMainActivity(): MainActivity
 
     @ActivityScoped
-    @ContributesAndroidInjector(modules = arrayOf(RepoModule::class))
+    @ContributesAndroidInjector(modules = [RepoModule::class])
     abstract fun bindRepoActivity(): RepoActivity
 
 }

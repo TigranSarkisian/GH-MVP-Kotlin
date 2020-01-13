@@ -8,7 +8,6 @@ import com.sarkisian.gh.ui.search.RepoSearchPresenter
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import kotlin.text.Typography.dagger
 
 @Module
 abstract class SearchModule {
@@ -19,7 +18,8 @@ abstract class SearchModule {
 
     @ActivityScoped
     @Binds
-    abstract fun repoSearchPresenter(repoSearchPresenter: RepoSearchPresenter):
-            RepoSearchContract.RepoSearchPresenter
+    abstract fun repoSearchPresenter(
+        repoSearchPresenter: RepoSearchPresenter
+    ): RepoSearchContract.RepoSearchPresenter
 
 }

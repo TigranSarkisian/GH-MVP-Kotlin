@@ -15,8 +15,6 @@ class GitHubRepositoryModule {
     @Provides
     fun provideRepoListRepository(
         gitHubAPI: GitHubAPI
-    ): GitHubDataSource {
-        return GitHubRepository(gitHubAPI)
-    }
+    ): GitHubDataSource = GitHubRepository(gitHubAPI)
 
 }

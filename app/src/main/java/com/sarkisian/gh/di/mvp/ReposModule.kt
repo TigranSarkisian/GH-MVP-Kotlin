@@ -18,7 +18,8 @@ abstract class ReposModule {
 
     @ActivityScoped
     @Binds
-    abstract fun repoListPresenter(repoListPresenter: RepoListPresenter):
-            RepoListContract.RepoListPresenter
+    abstract fun repoListPresenter(
+        repoListPresenter: RepoListPresenter
+    ): RepoListContract.RepoListPresenter
 
 }

@@ -60,14 +60,18 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 
     // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 
     // Rx
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+
+    // RX Binding
+    implementation "com.jakewharton.rxbinding2:rxbinding:2.2.0"
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:2.2.0"
 
     // Dagger
     implementation 'com.google.dagger:dagger:2.19'
@@ -78,7 +82,7 @@ dependencies {
 
     // Other
     implementation 'io.realm:android-adapters:2.1.0'
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.jakewharton.timber:timber:4.7.1'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     implementation 'joda-time:joda-time:2.9.9'
@@ -86,9 +90,5 @@ dependencies {
     // Glide
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     kapt 'com.github.bumptech.glide:compiler:4.8.0'
-
-    // rx binding
-    implementation "com.jakewharton.rxbinding2:rxbinding:2.2.0"
-    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:2.2.0"
 
 }

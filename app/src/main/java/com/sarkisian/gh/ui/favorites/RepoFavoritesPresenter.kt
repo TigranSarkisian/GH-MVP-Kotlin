@@ -10,12 +10,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 class RepoFavoritesPresenter @Inject constructor(
-    private val gitHubRepository: GitHubDataSource,
+    private val repository: GitHubDataSource,
     private val errorHandler: ErrorHandler
 ) : BasePresenter<RepoFavoritesContract.RepoFavoritesView>(), RepoFavoritesContract.RepoFavoritesPresenter {
 
     override fun getFavoriteRepos() {
-        gitHubRepository.getFavoriteRepos()
+        repository.getFavoriteRepos()
             .doOnSubscribe { view?.showLoadingIndicator(true) }
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterTerminate { view?.showLoadingIndicator(false) }
@@ -29,7 +29,7 @@ class RepoFavoritesPresenter @Inject constructor(
     }
 
     override fun deleteRepoFromFavorites(repo: Repo) {
-        gitHubRepository.deleteRepoFromFavorites(repo)
+        repository.deleteRepoFromFavorites(repo)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 view?.onRepoDeletedFromFavorites(repo)

@@ -18,7 +18,8 @@ abstract class RepoFavoritesModule {
 
     @ActivityScoped
     @Binds
-    abstract fun repoFavoritesPresenter(repoFavoritesPresenter: RepoFavoritesPresenter):
-            RepoFavoritesContract.RepoFavoritesPresenter
+    abstract fun repoFavoritesPresenter(
+        repoFavoritesPresenter: RepoFavoritesPresenter
+    ): RepoFavoritesContract.RepoFavoritesPresenter
 
 }

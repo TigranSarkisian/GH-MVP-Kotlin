@@ -17,13 +17,13 @@ object ApiFactory {
     @JvmStatic
     fun getGitHubAPI(baseUrl: String): GitHubAPI {
         val httpClient = OkHttpClient.Builder()
-            .connectTimeout(10L, TimeUnit.SECONDS)
-            .readTimeout(10L, TimeUnit.SECONDS)
-            .writeTimeout(10L, TimeUnit.SECONDS)
+            .connectTimeout(5, TimeUnit.SECONDS)
+            .readTimeout(5, TimeUnit.SECONDS)
+            .writeTimeout(5, TimeUnit.SECONDS)
 
         if (BuildConfig.DEBUG) {
             val logging = HttpLoggingInterceptor()
-            logging.level = HttpLoggingInterceptor.Level.BASIC
+            logging.level = HttpLoggingInterceptor.Level.BODY
             httpClient.addInterceptor(logging)
         }
 

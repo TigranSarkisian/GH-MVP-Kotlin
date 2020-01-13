@@ -12,7 +12,7 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class RepoSearchPresenter constructor(
-    private val gitHubRepository: GitHubDataSource,
+    private val repository: GitHubDataSource,
     private val errorHandler: ErrorHandler
 ) : BasePresenter<RepoSearchContract.RepoSearchView>(), RepoSearchContract.RepoSearchPresenter {
 
@@ -24,7 +24,7 @@ class RepoSearchPresenter constructor(
             .debounce(300, TimeUnit.MILLISECONDS)
             .doOnNext { Timber.i(it.toString()) }
             .toFlowable(BackpressureStrategy.LATEST)
-            .flatMap { gitHubRepository.searchRepos(it.toString()).toFlowable() }
+            .flatMap { repository.searchRepos(it.toString()).toFlowable() }
             .doOnNext { Timber.i("Search result size ${it.items.size}") }
             .map { it.items }
             .onErrorReturn { mutableListOf() }

@@ -9,12 +9,12 @@ import com.sarkisian.gh.util.extensions.addTo
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 class RepoListPresenter constructor(
-    private val gitHubRepository: GitHubDataSource,
+    private val repository: GitHubDataSource,
     private val errorHandler: ErrorHandler
 ) : BasePresenter<RepoListContract.RepoListView>(), RepoListContract.RepoListPresenter {
 
     override fun loadRepos(username: String) {
-        gitHubRepository.getRepos(username)
+        repository.getRepos(username)
             .doOnSubscribe { view?.showLoadingIndicator(true) }
             .observeOn(AndroidSchedulers.mainThread())
             .doAfterTerminate { view?.showLoadingIndicator(false) }
@@ -28,7 +28,7 @@ class RepoListPresenter constructor(
     }
 
     override fun deleteRepo(repo: Repo) {
-        gitHubRepository.deleteRepo(repo)
+        repository.deleteRepo(repo)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 view?.onRepoDeleted(repo)
@@ -39,7 +39,7 @@ class RepoListPresenter constructor(
     }
 
     override fun addRepo(repo: Repo) {
-        gitHubRepository.insertOrUpdateRepos(listOf(repo))
+        repository.insertOrUpdateRepos(listOf(repo))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 view?.onRepoAdded(repo)
@@ -50,7 +50,7 @@ class RepoListPresenter constructor(
     }
 
     override fun updateRepo(repo: Repo) {
-        gitHubRepository.insertOrUpdateRepos(listOf(repo))
+        repository.insertOrUpdateRepos(listOf(repo))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 view?.onRepoUpdated(repo)

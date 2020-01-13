@@ -19,7 +19,7 @@ class RepoContract {
 
     interface RepoPresenter : MvpPresenter<RepoView> {
 
-        fun loadRepo(gitHubUser: String, repoName: String)
+        fun loadRepo(gitHubUser: String?, repoName: String?)
 
         fun deleteRepo(repo: Repo)
 

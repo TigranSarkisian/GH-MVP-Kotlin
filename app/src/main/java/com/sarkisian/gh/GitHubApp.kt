@@ -19,6 +19,7 @@ class GitHubApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         installLeakCanary()
         turnOnStrictMode()
         Timber.plant(Timber.DebugTree())

@@ -17,24 +17,16 @@ import com.sarkisian.gh.ui.base.BaseFragment
 import com.sarkisian.gh.ui.repo.RepoActivity
 import com.sarkisian.gh.util.extensions.*
 import kotlinx.android.synthetic.main.fragment_repo_list.*
+import org.jetbrains.anko.support.v4.toast
 import org.koin.android.scope.currentScope
 
 
 class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
     RepoAdapter.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
 
-    private val repoListPresenter by currentScope.inject<RepoListContract.RepoListPresenter>()
+    private val presenter by currentScope.inject<RepoListContract.RepoListPresenter>()
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var repoAdapter: RepoAdapter
-
-    companion object {
-        fun newInstance(): RepoListFragment = RepoListFragment()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        repoListPresenter.attachView(this)
-    }
+    private lateinit var adapter: RepoAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +36,7 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        presenter.attachView(this)
 
         srl_repo_list.setOnRefreshListener(this@RepoListFragment)
 
@@ -55,60 +48,52 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
             (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
         }
 
-        repoAdapter = RepoAdapter(this@RepoListFragment)
-        rv_repo_list.adapter = repoAdapter
+        adapter = RepoAdapter(this@RepoListFragment)
+        rv_repo_list.adapter = adapter
     }
 
     override fun onResume() {
         super.onResume()
-        repoListPresenter.loadRepos(GIT_HUB_USER)
+        presenter.loadRepos(GIT_HUB_USER)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.detachView()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.add_repo -> {
-                repoListPresenter.addRepo(Repo.composeStubRepo())
-            }
-        }
+        if (item.itemId == R.id.add_repo) presenter.addRepo(Repo.composeStubRepo())
         return true
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) =
         inflater.inflate(R.menu.repo_list_fragment_menu, menu)
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        repoListPresenter.detachView()
-    }
+    override fun onRefresh() = presenter.loadRepos(GIT_HUB_USER)
 
-    override fun onRefresh() {
-        repoListPresenter.loadRepos(GIT_HUB_USER)
-    }
-
-    override fun onReposLoaded(repoList: MutableList<Repo>) {
-        repoAdapter.setItems(repoList) {}
-    }
+    override fun onReposLoaded(repoList: MutableList<Repo>) = adapter.setItems(repoList)
 
     override fun onRepoDeleted(repo: Repo) {
-        repoAdapter.removeItem(repo)
-        if (repoAdapter.itemCount == 0) {
+        adapter.removeItem(repo)
+        if (adapter.itemCount == 0) {
             showEmptyState(true)
         }
     }
 
     override fun onRepoAdded(repo: Repo) {
-        val insertedPosition = repoAdapter.insertItem(repo)
+        val insertedPosition = adapter.insertItem(repo)
         rv_repo_list.smoothScrollToPosition(insertedPosition)
         showEmptyState(false)
     }
 
-    override fun onRepoUpdated(repo: Repo) {
-        repoAdapter.updateItem(repo)
-    }
+    override fun onRepoUpdated(repo: Repo) = adapter.updateItem(repo)
 
     override fun showLoadingIndicator(value: Boolean) {
         when (value) {
-            true -> if (!srl_repo_list.isRefreshing) setActionBarTitle(getString(R.string.status_updating))
+            true -> {
+                if (!srl_repo_list.isRefreshing) setActionBarTitle(getString(R.string.status_updating))
+            }
             false -> {
                 srl_repo_list.isRefreshing = false
                 setActionBarTitle(getString(R.string.screen_list))
@@ -116,13 +101,9 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
         }
     }
 
-    override fun showEmptyState(value: Boolean) {
-        repo_list_empty_state.visible(value)
-    }
+    override fun showEmptyState(value: Boolean) = repo_list_empty_state.visible(value)
 
-    override fun showMessage(message: String) {
-        snack(message)
-    }
+    override fun showMessage(message: String) = toast(message)
 
     override fun onItemClick(position: Int, repo: Repo) {
         val intent = Intent(activity, RepoActivity::class.java)
@@ -131,8 +112,10 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
         startActivity(intent)
     }
 
-    override fun onItemLongClick(position: Int, repo: Repo) {
-        repoListPresenter.deleteRepo(repo)
+    override fun onItemLongClick(position: Int, repo: Repo) = presenter.deleteRepo(repo)
+
+    companion object {
+        fun newInstance(): RepoListFragment = RepoListFragment()
     }
 
 }

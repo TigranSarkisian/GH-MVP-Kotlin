@@ -9,10 +9,10 @@ import java.io.IOException
 
 class ErrorHandler constructor(private val context: Context) {
 
-    fun readError(error: Throwable, messageListener: (String) -> Unit) {
+    fun readError(error: Throwable, onResult: (String) -> Unit) {
         Timber.e(error)
 
-        messageListener(
+        onResult(
             when (error) {
                 is HttpException -> when (error.code()) {
                     304 -> context.getString(R.string.not_modified_error)

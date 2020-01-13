@@ -16,6 +16,7 @@ import com.sarkisian.gh.ui.base.BaseFragment
 import com.sarkisian.gh.ui.repo.RepoActivity
 import com.sarkisian.gh.util.extensions.*
 import kotlinx.android.synthetic.main.fragment_repo_favorites.*
+import org.jetbrains.anko.support.v4.toast
 import org.koin.android.scope.currentScope
 
 class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavoritesView,
@@ -23,16 +24,7 @@ class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavorite
 
     private val repoFavoritesPresenter by currentScope.inject<RepoFavoritesContract.RepoFavoritesPresenter>()
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var repoAdapter: RepoAdapter
-
-    companion object {
-        fun newInstance(): RepoFavoritesFragment = RepoFavoritesFragment()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        repoFavoritesPresenter.attachView(this)
-    }
+    private lateinit var adapter: RepoAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +34,8 @@ class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavorite
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        presenter.attachView(this)
+
         rv_repo_favorites.apply {
             linearLayoutManager = LinearLayoutManager(activity)
             layoutManager = linearLayoutManager
@@ -49,51 +43,37 @@ class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavorite
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
 
-        repoAdapter = RepoAdapter(this@RepoFavoritesFragment)
-        rv_repo_favorites.adapter = repoAdapter
+        adapter = RepoAdapter(this@RepoFavoritesFragment)
+        rv_repo_favorites.adapter = adapter
     }
 
     override fun onResume() {
         super.onResume()
-        repoFavoritesPresenter.getFavoriteRepos()
+        presenter.getFavoriteRepos()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        repoFavoritesPresenter.detachView()
+        presenter.detachView()
     }
 
-    override fun onFavoriteReposLoaded(repoList: MutableList<Repo>) {
-        repoAdapter.setItems(repoList) {}
-    }
+    override fun onFavoriteReposLoaded(repoList: MutableList<Repo>) = adapter.setItems(repoList)
 
     override fun onRepoDeletedFromFavorites(repo: Repo) {
-        repoAdapter.removeItem(repo)
-        if (repoAdapter.itemCount == 0) {
-            showEmptyState(true)
-        }
+        adapter.removeItem(repo)
+        if (adapter.itemCount == 0) showEmptyState(true)
     }
 
     override fun onRepoAddedToFavorites(repo: Repo) {
-        repoAdapter.insertItem(repo)
+        adapter.insertItem(repo)
         showEmptyState(false)
     }
 
-    override fun onRepoUpdated(repo: Repo) {
-        repoAdapter.updateItem(repo)
-    }
+    override fun onRepoUpdated(repo: Repo) = adapter.updateItem(repo)
 
-    override fun showLoadingIndicator(value: Boolean) {
-        // not used here
-    }
+    override fun showEmptyState(value: Boolean) = repo_favorites_empty_state.visible(value)
 
-    override fun showEmptyState(value: Boolean) {
-        repo_favorites_empty_state.visible(value)
-    }
-
-    override fun showMessage(message: String) {
-        snack(message)
-    }
+    override fun showMessage(message: String) = toast(message)
 
     override fun onItemClick(position: Int, repo: Repo) {
         val intent = Intent(activity, RepoActivity::class.java)
@@ -102,8 +82,10 @@ class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavorite
         startActivity(intent)
     }
 
-    override fun onItemLongClick(position: Int, repo: Repo) {
-        repoFavoritesPresenter.deleteRepoFromFavorites(repo)
+    override fun onItemLongClick(position: Int, repo: Repo) = presenter.deleteRepoFromFavorites(repo)
+
+    companion object {
+        fun newInstance(): RepoFavoritesFragment = RepoFavoritesFragment()
     }
 
 }

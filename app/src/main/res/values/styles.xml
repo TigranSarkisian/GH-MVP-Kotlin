@@ -7,8 +7,7 @@
         <item name="colorControlNormal">@android:color/white</item>
     </style>
 
-    <style name="AppTheme" parent="BaseTheme">
-    </style>
+    <style name="AppTheme" parent="BaseTheme"></style>
 
     <style name="Toolbar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

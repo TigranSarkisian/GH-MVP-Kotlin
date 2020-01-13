@@ -11,23 +11,22 @@ import java.util.concurrent.TimeUnit
 
 object ApiFactory {
 
-    private const val DEFAULT_TIMEOUT = 10L
-
     const val BASE_URL = "https://api.github.com/"
     const val GIT_HUB_USER = "google"
 
     @JvmStatic
     fun getGitHubAPI(baseUrl: String): GitHubAPI {
         val httpClient = OkHttpClient.Builder()
-            .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-            .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-            .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+            .connectTimeout(10L, TimeUnit.SECONDS)
+            .readTimeout(10L, TimeUnit.SECONDS)
+            .writeTimeout(10L, TimeUnit.SECONDS)
 
         if (BuildConfig.DEBUG) {
             val logging = HttpLoggingInterceptor()
             logging.level = HttpLoggingInterceptor.Level.BASIC
             httpClient.addInterceptor(logging)
         }
+
         val okHttpClient = httpClient.build()
 
         /*if (auth_required) {

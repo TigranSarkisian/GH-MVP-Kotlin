@@ -10,6 +10,7 @@ fun BaseAdapter<Repo, RepoAdapter.ViewHolder>.insertItems(positionStart: Int, it
     val itemsCount = this.items.size
     items.sortByDescending { repo: Repo? -> repo?.id }
     this.items.addAll(items)
+
     if (positionStart != -1 && itemsCount != -1) {
         notifyItemRangeInserted(positionStart, itemsCount)
     } else {
@@ -21,6 +22,7 @@ fun BaseAdapter<Repo, RepoAdapter.ViewHolder>.insertItemOnTop(item: Repo): Int {
     this.items.add(0, item)
     val necessaryItem = this.items.find { item.id == it.id }
     val position = this.items.indexOf(necessaryItem)
+
     if (position != -1) {
         notifyItemInserted(position)
         return position
@@ -34,6 +36,7 @@ fun BaseAdapter<Repo, RepoAdapter.ViewHolder>.insertItem(item: Repo): Int {
     this.items.sortByDescending { repo: Repo? -> repo?.id }
     val necessaryItem = this.items.find { item.id == it.id }
     val position = this.items.indexOf(necessaryItem)
+
     if (position != -1) {
         notifyItemInserted(position)
         return position
@@ -45,6 +48,7 @@ fun BaseAdapter<Repo, RepoAdapter.ViewHolder>.insertItem(item: Repo): Int {
 fun BaseAdapter<Repo, RepoAdapter.ViewHolder>.removeItem(item: Repo) {
     val necessaryItem = this.items.find { item.id == it.id }
     val position = this.items.indexOf(necessaryItem)
+
     if (position != -1) {
         this.items.remove(necessaryItem)
         notifyItemRemoved(position)
@@ -56,6 +60,7 @@ fun BaseAdapter<Repo, RepoAdapter.ViewHolder>.removeItem(item: Repo) {
 fun BaseAdapter<Repo, RepoAdapter.ViewHolder>.updateItem(item: Repo) {
     val necessaryItem = this.items.find { item.id == it.id }
     val position = this.items.indexOf(necessaryItem)
+
     if (position != -1) {
         this.items[position] = item
         notifyItemChanged(position)

@@ -6,21 +6,28 @@ import com.sarkisian.gh.data.repository.GitHubDataSource
 import com.sarkisian.gh.ui.base.mvp.BasePresenter
 import com.sarkisian.gh.util.error.ErrorHandler
 import com.sarkisian.gh.util.extensions.addTo
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import timber.log.Timber
 
 class RepoPresenter constructor(
-    private val gitHubRepository: GitHubDataSource,
+    private val repository: GitHubDataSource,
     private val errorHandler: ErrorHandler
 ) : BasePresenter<RepoContract.RepoView>(), RepoContract.RepoPresenter {
 
-    override fun loadRepo(gitHubUser: String, repoName: String) {
-        gitHubRepository.getRepo(gitHubUser, repoName)
+    override fun loadRepo(gitHubUser: String?, repoName: String?) {
+        Observable.just(Pair(gitHubUser, repoName))
+            .filter { it.first != null && it.second != null }
+            .firstOrError()
+            .flatMap { repository.getRepo(it.first!!, it.second!!) }
             .doOnSubscribe { view?.showLoadingIndicator(true) }
             .observeOn(AndroidSchedulers.mainThread())
+            .filter { !it.isEmpty() }
+            .toSingle()
+            .map { it.get() }
             .doAfterTerminate { view?.showLoadingIndicator(false) }
             .subscribe({
-                if (!it.isEmpty) view?.onRepoLoaded(it.get())
+                view?.onRepoLoaded(it!!)
             }, {
                 errorHandler.readError(it) { view?.showMessage(it) }
             })
@@ -28,7 +35,7 @@ class RepoPresenter constructor(
     }
 
     override fun deleteRepo(repo: Repo) {
-        gitHubRepository.deleteRepo(repo)
+        repository.deleteRepo(repo)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 view?.onRepoDeleted(repo)
@@ -39,7 +46,7 @@ class RepoPresenter constructor(
     }
 
     override fun updateRepo(repo: Repo) {
-        gitHubRepository.insertOrUpdateRepos(listOf(repo))
+        repository.insertOrUpdateRepos(listOf(repo))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 view?.onRepoUpdated(repo)
@@ -50,7 +57,7 @@ class RepoPresenter constructor(
     }
 
     override fun addRepoToFavorites(repo: Repo) {
-        gitHubRepository.addRepoToFavorites(repo)
+        repository.addRepoToFavorites(repo)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Timber.i("${repo.name} added to favorites")
@@ -61,7 +68,7 @@ class RepoPresenter constructor(
     }
 
     override fun deleteRepoFromFavorites(repo: Repo) {
-        gitHubRepository.deleteRepoFromFavorites(repo)
+        repository.deleteRepoFromFavorites(repo)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Timber.i("${repo.name} removed from favorites")

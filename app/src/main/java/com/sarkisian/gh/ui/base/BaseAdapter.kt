@@ -12,7 +12,12 @@ abstract class BaseAdapter<D, VH : BaseViewHolder<D>> : RecyclerView.Adapter<VH>
     override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): VH {
-        val view = LayoutInflater.from(viewGroup.context).inflate(getItemViewId(), viewGroup, false)
+        val view = LayoutInflater.from(viewGroup.context).inflate(
+            getItemViewId(),
+            viewGroup,
+            false
+        )
+
         return getViewHolder(view)
     }
 

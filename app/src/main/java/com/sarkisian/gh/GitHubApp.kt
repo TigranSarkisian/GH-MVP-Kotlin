@@ -29,7 +29,12 @@ class GitHubApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@GitHubApp)
-            modules(appModule, apiModule, repositoryModule, mvpModule)
+            modules(
+                appModule,
+                apiModule,
+                repositoryModule,
+                mvpModule
+            )
         }
     }
 

@@ -15,8 +15,7 @@ import org.koin.android.scope.currentScope
 
 class RepoActivity : BaseActivity(), RepoContract.RepoView {
 
-    @Inject
-    lateinit var presenter: RepoContract.RepoPresenter
+    private val presenter by currentScope.inject<RepoContract.RepoPresenter>()
     private var repo: Repo? = null
     private var menu: Menu? = null
 

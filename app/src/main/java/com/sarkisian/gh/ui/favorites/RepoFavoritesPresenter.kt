@@ -11,7 +11,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 class RepoFavoritesPresenter constructor(
     private val repository: GitHubDataSource,
     private val errorHandler: ErrorHandler
-) : BasePresenter<RepoFavoritesContract.RepoFavoritesView>(), RepoFavoritesContract.RepoFavoritesPresenter {
+) : BasePresenter<RepoFavoritesContract.RepoFavoritesView>(),
+    RepoFavoritesContract.RepoFavoritesPresenter {
 
     override fun getFavoriteRepos() {
         repository.getFavoriteRepos()

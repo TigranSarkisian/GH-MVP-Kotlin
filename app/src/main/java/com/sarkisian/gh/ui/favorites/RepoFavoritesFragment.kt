@@ -22,7 +22,7 @@ import org.koin.android.scope.currentScope
 class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavoritesView,
     RepoAdapter.OnItemClickListener {
 
-    private val repoFavoritesPresenter by currentScope.inject<RepoFavoritesContract.RepoFavoritesPresenter>()
+    private val presenter by currentScope.inject<RepoFavoritesContract.RepoFavoritesPresenter>()
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var adapter: RepoAdapter
 

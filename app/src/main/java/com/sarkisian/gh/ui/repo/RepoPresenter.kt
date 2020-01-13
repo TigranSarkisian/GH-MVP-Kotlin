@@ -17,14 +17,14 @@ class RepoPresenter constructor(
 
     override fun loadRepo(gitHubUser: String?, repoName: String?) {
         Observable.just(Pair(gitHubUser, repoName))
+            .doOnSubscribe { view?.showLoadingIndicator(true) }
             .filter { it.first != null && it.second != null }
             .firstOrError()
             .flatMap { repository.getRepo(it.first!!, it.second!!) }
-            .doOnSubscribe { view?.showLoadingIndicator(true) }
-            .observeOn(AndroidSchedulers.mainThread())
             .filter { !it.isEmpty() }
             .toSingle()
             .map { it.get() }
+            .observeOn(AndroidSchedulers.mainThread())
             .doAfterTerminate { view?.showLoadingIndicator(false) }
             .subscribe({
                 view?.onRepoLoaded(it!!)

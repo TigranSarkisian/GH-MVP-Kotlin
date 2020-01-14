@@ -9,7 +9,6 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.sarkisian.gh.R
-import com.sarkisian.gh.data.api.ApiFactory.GIT_HUB_USER
 import com.sarkisian.gh.data.entity.Owner
 import com.sarkisian.gh.data.entity.Repo
 import com.sarkisian.gh.ui.adapter.RepoAdapter
@@ -54,7 +53,7 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
 
     override fun onResume() {
         super.onResume()
-        presenter.loadRepos(GIT_HUB_USER)
+        presenter.loadRepos(GOOGLE_REPO)
     }
 
     override fun onDestroyView() {
@@ -70,7 +69,7 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) =
         inflater.inflate(R.menu.repo_list_fragment_menu, menu)
 
-    override fun onRefresh() = presenter.loadRepos(GIT_HUB_USER)
+    override fun onRefresh() = presenter.loadRepos(GOOGLE_REPO)
 
     override fun onReposLoaded(repoList: MutableList<Repo>) = adapter.setItems(repoList)
 
@@ -115,7 +114,11 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
     override fun onItemLongClick(position: Int, repo: Repo) = presenter.deleteRepo(repo)
 
     companion object {
+
+        const val  GOOGLE_REPO = "google"
+
         fun newInstance(): RepoListFragment = RepoListFragment()
+
     }
 
 }

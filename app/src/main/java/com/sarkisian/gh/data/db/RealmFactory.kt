@@ -15,7 +15,6 @@ object RealmFactory {
     private const val REALM_DB_NAME = "gh.realm"
     private const val SCHEMA_VERSION = 1
 
-    @JvmStatic
     fun init(context: Context) {
         Realm.init(context)
 
@@ -33,7 +32,6 @@ object RealmFactory {
         }
     }
 
-    @JvmStatic
     fun <T> insertOrUpdateRepos(data: T) {
         when (data) {
             is Repo -> Realm.getDefaultInstance().use { realm ->
@@ -45,7 +43,6 @@ object RealmFactory {
         }
     }
 
-    @JvmStatic
     fun deleteRepo(repo: Repo) {
         Realm.getDefaultInstance().use { realm ->
             realm.executeTransaction { r ->
@@ -58,7 +55,6 @@ object RealmFactory {
         }
     }
 
-    @JvmStatic
     fun getRepos(): MutableList<Repo> {
         var repoList: MutableList<Repo> = mutableListOf()
 
@@ -75,7 +71,6 @@ object RealmFactory {
         return repoList
     }
 
-    @JvmStatic
     fun getFavoriteRepos(): MutableList<Repo> {
         var repoList: MutableList<Repo> = mutableListOf()
 
@@ -93,7 +88,6 @@ object RealmFactory {
         return repoList
     }
 
-    @JvmStatic
     fun getRepo(repoName: String): Repo? {
         var repo: Repo? = null
 

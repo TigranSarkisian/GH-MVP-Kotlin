@@ -1,7 +1,6 @@
 package com.sarkisian.gh.di.data
 
 import com.sarkisian.gh.data.api.ApiFactory
-import com.sarkisian.gh.data.api.ApiFactory.BASE_URL
 import com.sarkisian.gh.data.api.GitHubAPI
 import dagger.Module
 import dagger.Provides
@@ -12,6 +11,6 @@ class GitHubAPIModule {
 
     @Singleton
     @Provides
-    fun provideGitHubAPI(): GitHubAPI = ApiFactory.getGitHubAPI(BASE_URL)
+    fun provideGitHubAPI(): GitHubAPI = ApiFactory.gitHubAPI
 
 }

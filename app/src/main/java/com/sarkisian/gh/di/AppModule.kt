@@ -29,7 +29,7 @@ object AppModule {
     }
 
     val apiModule = module {
-        single { ApiFactory.getGitHubAPI(ApiFactory.BASE_URL) }
+        single { ApiFactory.gitHubAPI }
     }
 
     val repositoryModule = module {

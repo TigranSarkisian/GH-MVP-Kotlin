@@ -2,6 +2,7 @@ package com.sarkisian.gh.data.api
 
 
 import com.sarkisian.gh.BuildConfig
+import com.sarkisian.gh.data.api.interceptor.AuthInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -39,21 +40,7 @@ object NetworkFactory {
             httpClient.addInterceptor(logging)
         }
 
-        /*if (auth_required) {
-            // First option
-            httpClient.addNetworkInterceptor(AuthInterceptor())
-
-            // Second option
-            httpClient.interceptors().add(Interceptor { chain ->
-                val original = chain.request()
-                val request = original.newBuilder()
-                        .header("Authorization", "Basic ***")
-                        .method(original.method(), original.body())
-                        .build()
-
-                chain.proceed(request)
-            })
-        }*/
+        httpClient.addNetworkInterceptor(AuthInterceptor())
 
         return httpClient.build()
     }

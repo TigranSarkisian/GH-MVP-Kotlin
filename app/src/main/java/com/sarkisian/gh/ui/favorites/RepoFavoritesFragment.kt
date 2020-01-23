@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sarkisian.gh.R
-import com.sarkisian.gh.data.api.ApiFactory.GIT_HUB_USER
 import com.sarkisian.gh.data.entity.Owner
 import com.sarkisian.gh.data.entity.Repo
 import com.sarkisian.gh.di.scope.ActivityScoped
@@ -53,7 +52,7 @@ class RepoFavoritesFragment : BaseFragment(), RepoFavoritesContract.RepoFavorite
         repoAdapter = RepoAdapter(this@RepoFavoritesFragment)
         rv_repo_favorites.adapter = repoAdapter
 
-        repoFavoritesPresenter.loadFavoriteRepos(GIT_HUB_USER)
+        repoFavoritesPresenter.loadFavoriteRepos("google")
     }
 
     override fun onDestroyView() {

@@ -9,7 +9,6 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import com.sarkisian.gh.R
-import com.sarkisian.gh.data.api.ApiFactory.GIT_HUB_USER
 import com.sarkisian.gh.data.entity.Owner
 import com.sarkisian.gh.data.entity.Repo
 import com.sarkisian.gh.di.scope.ActivityScoped
@@ -57,7 +56,7 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
 
         repoAdapter = RepoAdapter(this@RepoListFragment)
         rv_repo_list.adapter = repoAdapter
-        repoListPresenter.loadRepos(GIT_HUB_USER, true)
+        repoListPresenter.loadRepos("google", true)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -87,7 +86,7 @@ class RepoListFragment : BaseFragment(), RepoListContract.RepoListView,
     }
 
     override fun onRefresh() {
-        repoListPresenter.loadRepos(GIT_HUB_USER, true)
+        repoListPresenter.loadRepos("google", true)
     }
 
     override fun showRepos(repoList: MutableList<Repo>) {

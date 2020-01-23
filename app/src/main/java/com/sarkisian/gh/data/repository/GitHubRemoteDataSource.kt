@@ -14,14 +14,14 @@ class GitHubRemoteDataSource @Inject constructor(
 ) : GitHubDataSource {
 
     override fun getRepo(gitHubUser: String, repoName: String): Observable<Repo> {
-        return gitHubAPI.getRepo(gitHubUser, repoName)
+        return gitHubAPI.loadRepo(gitHubUser, repoName)
                 .doOnNext {
                     Timber.i("Loaded ${it.name} repo")
                 }
     }
 
     override fun getRepos(gitHubUser: String, page: Int): Observable<MutableList<Repo>> {
-        return gitHubAPI.getRepos(username = gitHubUser, page = page)
+        return gitHubAPI.loadRepos(username = gitHubUser, page = page)
                 .doOnNext {
                     Timber.i("Loaded ${it.size} repos")
                 }

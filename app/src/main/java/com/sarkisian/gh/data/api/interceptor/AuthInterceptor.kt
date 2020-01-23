@@ -8,22 +8,11 @@ class AuthInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val original = chain.request()
         val request = original.newBuilder()
-                .addHeader("Authorization", "Basic ***")
-                .method(original.method(), original.body())
-                .build()
+            .addHeader("Authorization", "token a6a6b58fa65e18eb344d952a2ab782f207a0987a")
+            .method(original.method(), original.body())
+            .build()
+
         return chain.proceed(request)
     }
-
-    /*if (auth_required) {
-         httpClient.interceptors().add(Interceptor { chain ->
-             val original = chain.request()
-             val request = original.newBuilder()
-                     .header("Authorization", "Basic ***")
-                     .method(original.method(), original.body())
-                     .build()
-
-             chain.proceed(request)
-         })
-     }*/
 
 }
